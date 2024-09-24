@@ -719,11 +719,11 @@ bg "bg\p8150057.jpg",13
 
 
 
-`I got off the train.@
+`Tôi bước xuống ga tàu.@
 br
-`And was greeted by a rush of air so warm I could feel myself melting away.@
+`Và được chào đón bởi một luồng khí ấm đến mức tôi có thể cảm thấy mình đang tan chảy.@
 br
-`Summer.  Of course.@
+`Mùa hè là thế mà.@
 br
 `Not the the hottest day on record.  But plenty hot enough.@
 br
@@ -3181,11 +3181,11 @@ br
 br
 `I felt like I'd lost something.  I felt like I'd gained something.  I felt all mixed-up.\
 
-`So I said: "I'm home ... Mom."@
+`Rồi tôi lên tiếng: "Mẹ ơi...con về rồi."@
 br
-`So she replied: "Welcome home ... Takahiro."@
+`Và bà ấy trả lời: "Mừng con về...Takahiro."@
 br
-`And I told myself: it was time for new footsteps, new paths.  My future would surely unfold in this world.@
+`Và tôi tự nhủ: it was time for new footsteps, new paths.  My future would surely unfold in this world.@
 br
 `This world of so many wonders.\
 
@@ -3266,7 +3266,7 @@ br
 br
 br
 br
-`No peeking yet.  Sorry.\
+`Chưa đến lúc đâu. chơi tiếp đi.\
 
 
 csp -1
@@ -3620,24 +3620,24 @@ br
 br
 `Đủ để một học sinh cấp 2 lên cấp 3, một học sinh cấp 3 lên đại học, và đủ dể một sinh viên đại học trở thành một người làm công ăn lương.  Thế có hơi lạ không ta?  À thì, không. Đấy là điều đương nhiên rồi mà nhỉ?\
 
-`Dù gì thì đó cũng là một khoảng thời gian dài.  , that the work of your hands was not in vain.@
+`Dù gì thì đó cũng là một khoảng thời gian dài. Đủ để tự nhủ "ta cần phải để lại đấu vết là ta đã tồn tại, để công sức từ chính bàn tay ta không uổng phí"@
 br
-`And as a colleague of mine who also writes visual novels once said: "I want to write new pieces.  I want to write pieces that shine in the darkness, and stand up to the very best storytelling there is in the world."@
+'Và một đồng nghiệp của tôi cũng hay chấp bút cho tiểu thuyết trực quan từng nói: "Tôi muốn viết những điều mới. Viết những điều xé toang màn đêm, và có thể đứng vững giữa những tượng đài tự sự hay nhất thế giới"@
 br
-`... man, that's grandiose.\
+`... chà, hoành tráng ghê.\
 
-`I can't aspire to something like that.@
+`Tôi không thể khao khát một cái gì đó như thế.@
 br
-`But I can hope that you enjoyed reading this piece, and that it moved you in some way.@
+`Nhưng tôi hy vọng bạn thích tác phẩm này và nó đã khiến bạn cảm động theo một cách nào đó.@
 br
-`And I can pray that we will meet again someday, on other pages, with new stories to tell each other.@
+`Và tôi mong rằng một ngày nào đó chúng ta có thể gặp lại nhau trên một trang sách khác, với những câu chuyện mới mẻ để kể cho nhau nghe.@
 br
-`So thank you once again.@
-br
-br
+`Một lần nữa, xin cảm ơn.@
 br
 br
-`- Wataru, at home, on 15 January 2007\
+br
+br
+`- Wataru, tại gia, 15/1/2007\
 
 
 
