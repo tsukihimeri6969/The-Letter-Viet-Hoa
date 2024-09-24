@@ -1,0 +1,3652 @@
+;gameid The Letter
+*define
+nsa
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;エイリアス定義
+;変数番号使用領域を指定。この番号から順に予約。
+    mov %0,150   ;数字変数用
+    mov %1,150   ;文字列変数用
+    mov %2,500   ;数字変数（グローバル）予約開始番号
+    mov %3,500   ;文字列変数（グローバル）予約開始番号
+
+;よく使う変数
+   ;数字変数　座標
+    numalias x,%0:inc %0
+    numalias y,%0:inc %0
+    numalias x1,%0:inc %0
+    numalias y1,%0:inc %0
+
+   ;数字変数　ボタン返り値
+    numalias BtnRes,%0:inc %0
+
+    ;ループ用
+    numalias Loop,%0:inc %0
+
+    ;座標判定用
+    numalias GapY,%0:inc %0
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;テキストウィンドウ用
+;テキストクリック待ちアイコン関係のエイリアス定義
+    ;定数 クリック待ちアイコンのスプライト番号
+    ;クリック待ち
+    ;numalias TextCCPageSpNum,800
+    ;オートモード用
+    ;numalias TextCCAutoSpNum,801
+
+    ;文字列変数 現在表示中のテキスト（セーブ画面カスタマイズ用）
+    numalias TextLogNow,%1:inc %1
+    ;文字列変数 現在の名前（ここでは「csp -1」対応のため）
+    numalias TextName,%1:inc %1
+
+    ;数字変数 改ページかどうかの判定用
+    numalias ClickType,%0:inc %0
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;選択肢カスタマイズ用
+   ;数字変数　選択肢の数
+    numalias TextSelectionNum,%0:inc %0
+    numalias TextSelectionPitchy,%0:inc %0
+
+;オードモード用
+    ;数字変数 オードモードオンフラグ
+    numalias AutomodeOn,%0:inc %0
+
+    ;数字変数 オードモード遅延スピード
+    numalias AutomodeSpeed,%0:inc %0
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;セーブ画面用
+    ;数字変数 セーブ画面ページ（一時使用）
+    numalias SavemodePageNow,%0:inc %0
+
+    ;数字変数[グローバル] セーブ画面ページ保存
+    numalias SavemodePage,%2:inc %2
+
+    ;数字変数[グローバル] 前回セーブしたセーブデータ番号
+    numalias SavedataNewNum,%2:inc %2
+
+    ;文字列変数[グローバル] セーブデータ情報
+    numalias SavedataInfo,%3:add %3,100
+
+    ;数字変数 セーブ画面セーブデータ番号ダミー（一時使用）
+    numalias SavedataDummyNum,%0:inc %0
+
+    ;数字変数 セーブ画面セーブデータ番号（一時使用）
+    numalias SavedataNowNum,%0:inc %0
+
+    ;数字変数 セーブ画面セーブデータのコメント
+    numalias PreviewComment,200
+    numalias SavedataComment,250
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;ロード画面用
+    ;数字変数 ロード画面ページ（一時使用）
+    numalias LoadmodePageNow,%0:inc %0
+
+    ;数字変数 セーブ画面セーブデータ番号ダミー（一時使用）
+    numalias LoaddataDummyNum,%0:inc %0
+
+    ;数字変数 セーブ画面セーブデータ番号（一時使用）
+    numalias LoaddataNowNum,%0:inc %0
+
+;オプション設定
+    
+    ;数字変数 ボイス音量
+    numalias VoiceVol,%0:inc %0
+
+    ;数字変数 BGM音量
+    numalias BgmVol,%0:inc %0
+
+    ;数字変数 効果音音量
+    numalias SeVol,%0:inc %0
+
+    ;数字変数 テキスト表示スピード、最大値
+    numalias MainTextSpeed,%0:inc %0
+    numalias MainTextSpeedMax,500
+
+    ;数字変数 オートモード遅延スピード最大値
+    numalias AutomodeSpeedMax,1000
+
+    ;数字変数 エフェクトカットフラグ
+    numalias EffectCutOn,%0:inc %0
+
+    ;数字変数[グローバル] 画面モードフルスクリーンオン
+    numalias ScreenModeFull,%2:inc %2
+
+    ;数字変数 画面モードフルスクリーンオン仮設定（一時使用）
+    numalias ScreenModeFullTmp,%0:inc %0
+
+    ;数字変数 オプション変更部分把握用（一時使用）
+    numalias OptionChangePart,%0:inc %0
+
+    ;数字変数 テキスト速度変更バー（一時使用）
+    numalias MainTextSpeedBarVal,%0:inc %0
+
+    ;数字変数 オートモード速度変更バー（一時使用）
+    numalias AutomodeSpeedBarVal,%0:inc %0
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;ボタンウェイト用
+usewheel   ;btnwait時にマウスホイールの入力を受け付ける
+useescspc  ;btnwait時にESC、スペースの入力を受け付ける
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;スプライト階層定義
+humanz 900   ;立ち絵をスプライト９００番の下に表示
+windowback   ;テキストウィンドウを立ち絵より上に表示
+
+   ;数字変数必要なテキストウィンドウの数値
+    numalias TextWindowFontSizeY,%0:inc %0
+    numalias TextWindowFontPitchY,%0:inc %0
+
+;ユーザー定義命令用
+    ;数字変数 csp命令のパラメータ
+    numalias CspParam,%0:inc %0
+
+;テキストクリック待ちアイコン関係のエイリアス定義
+   ;定数　クリック待ちアイコンのスプライト番号
+    numalias TextCC1SpNum,801
+    numalias TextCC2SpNum,802
+
+   ;数字変数　クック待ちアイコンの文字送り、改ページ判定用
+    numalias TextCC12flug,%0:inc %0
+
+
+;----------  右クリックメニュー設定  ----------
+rmenu "`LOG MODE",lookback,"`SAVE",save,"`LOAD",load,"`RETURN TO TITLE",reset
+menusetwindow 18,18,1,1,1,1,#666666
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;セーブデータの保存先を指定
+;savedir "savedata"    ;セーブデータの保存先を指定
+
+;ロード直後に呼び出すサブルーチン
+;loadgosub *load_after
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;文字／ページ送り待ちの飛び先ラベル（サブルーチン）
+textgosub *text_cw
+
+;テキスト表示の直前の飛び先ラベル（サブルーチン）
+pretextgosub *pretext
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;ユーザー定義の命令を指定「csp」
+defsub csp
+
+;killmenu 7
+
+versionstr "The Letter version 1.00E","P.o.l.c."
+
+caption "The Letter"
+
+globalon
+
+defaultspeed 40,20,0
+
+windoweffect 10,300
+
+mp3fadeout 1000
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;エフェクトの定義
+
+effect 10,10,3500
+;初めてクリアのタイトル用
+
+effect 11,10,1000
+;ロゴ用
+
+effect 12,10,600
+;タイトル用
+
+effect 13,10,1500
+;背景
+
+effect 14,10,300
+;すばやく
+
+effect 16,10,2000
+;立ち絵出現
+
+effect 17,10,3000
+;エンディング
+
+effect 18,10,5000
+;スタッフロール
+
+effect 19,10,200
+;表情変化
+
+
+effect 20,18,1500,"eff\ub.jpg"
+;上から見える
+
+effect 21,18,1000,"eff\db.jpg"
+;下から見える
+
+effect 22,18,1000,"eff\rb.jpg"
+;右から見える
+
+effect 23,18,1000,"eff\lb.jpg"
+;左から見える
+
+effect 24,18,600,"eff\tub.jpg"
+;真ん中から見える
+
+
+effect 30,10,650
+;表情変化
+
+;bg "bg\",13
+;ld ,":a;tati\",16
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;変数の定義
+
+;％１０は、「凛しっかり！変数」(笑)
+;初期値０〜６
+;選択肢はエンディングに関係する
+
+;％２０は、「神谷先生変数」
+;初期値０〜３
+;選択肢はエンディングに関係する
+
+;％３０は、「喫茶店での運命決定変数」
+;初期値０〜１
+;選択肢はエンディングに関係する
+
+;％３００は、「１回目クリア変数」
+;１回クリアすると１になる
+;以後、変化なし
+
+;％３０１は、「エンド１クリア変数」
+;１回クリアすると１になる
+;以後、変化なし
+
+;％３０２は、「エンド２クリア変数」
+;１回クリアすると１になる
+;以後、変化なし
+
+;％３０３は、「エンド３クリア変数」
+;１回クリアすると１になる
+;以後、変化なし
+
+;％３０４は、「エンド４クリア変数」
+;１回クリアすると１になる
+;以後、変化なし
+
+
+game
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;ユーザー定義命令
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;csp
+*csp
+;呼び出し元の数値を取得
+getparam %CspParam
+
+;呼び出し元で−１が指定されていたら、全てのスプライトを破棄した後、クリック待ちアイコンスプライトを再定義して終わる
+if %CspParam=-1 _csp -1:lsph TextCC1SpNum,":l/3,160,2;cursor0.bmp",0,0:lsph TextCC2SpNum,":l/3,160,2;cursor1.bmp",0,0:return
+
+;呼び出し元でクリック待ちアイコンスプライトの番号を指定していたら何もせず終わる（意図的に破棄する事が予想されるなら、この部分は要りません）
+if %CspParam=TextCC1SpNum return
+if %CspParam=TextCC2SpNum return
+
+;上記以外なら呼び出し元で指定した数値のスプライト番号を破棄して終わる
+_csp %CspParam:return
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;テキスト表示加工部
+*pretext
+
+bgmdownmode 1
+dwavestop 0
+
+;テキストの表示速度を設定
+
+
+return
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;文字／ページ送り待ちのサブルーチン
+
+;■■■■■■■■■■■■
+;文字／ページ送り待ちのサブルーチン設定
+*text_cw
+
+;現在のテキストを取得（セーブ画面で使用する）
+gettext $TextLogNow
+
+getcursorpos %x,%y       ;テキストカーソル位置を取得
+ispage %TextCC12Flug     ;クリック待ちか改ページかを取得
+
+;テキストウィンドウをエフェクトの時にも表示させたままにする
+erasetextwindow 0
+
+;クリック待ちアイコンを表示
+if %TextCC12Flug=0 amsp TextCC1SpNum,%x,%y:vsp TextCC1SpNum,1
+if %TextCC12Flug=1 amsp TextCC2SpNum,%x,%y:vsp TextCC2SpNum,1
+print 1
+
+btndef clear     ;ボタン定義をクリアしておく
+getenter         ;ENTERキーの入力を受け付ける
+
+;■■■■■■■■■■■■
+;文字／ページ送り待ちのボタンループ
+*text_cwlp
+saveon     ;セーブ可能な状態にする
+
+;文字／ページ送り待ちのボタンウェイト
+textbtnwait %BtnRes
+
+;「文字、ページ送りクリック」左クリック
+if %BtnRes=0 goto *text_cw_next
+if %BtnRes=-3 goto *text_cw_next     ;←追加
+if %BtnRes=-11 goto *text_cw_next    ;←追加
+if %BtnRes=-19 goto *text_cw_next    ;←追加
+
+;「右クリックメニュー」右クリック、Escキー入力
+if %BtnRes=-1 gosub *text_cw_rclk:goto *text_cw
+if %BtnRes=-10 gosub *text_cw_rclk:goto *text_cw
+
+
+;「バックログ画面」マウスホイール上入力
+if %BtnRes=-2 gosub *text_cw_lookback:goto *text_cw  ;←追加
+
+;それ以外の入力は文字／ページ送り待ちのボタンループに戻る
+goto *text_cwlp
+
+
+
+;■■■■■■■■■■■■
+;「文字／ページ送り」クリック
+*text_cw_neXt
+
+;クリック待ちアイコンを非表示
+vsp TextCC1SpNum,0:vsp TextCC2SpNum,0
+print 1
+
+texec    ;ページ送り待ちの場合テキストを消去する
+
+;テキストウィンドウをエフェクトの時に非表示にする
+erasetextwindow 1
+
+return    ;文字／ページ送り待ちのサブルーチンを終える
+
+
+;■■■■■■■■■■■■
+;「右クリックメニュー」
+*text_cw_rclk
+
+;クリック待ちアイコンを非表示
+vsp TextCC1SpNum,0
+vsp TextCC2SpNum,0
+print 1
+
+textoff    ;テキストウィンドウを非表示にする
+systemcall rmenu    ;右クリックメニューを呼び出す
+texton    ;テキストウィンドウを表示する
+return
+
+;■■■■■■■■■■■■
+;「バックログ画面」
+*text_cw_lookback
+
+;テキストカーソルを非表示
+vsp TextCC1SpNum,0
+vsp TextCC2SpNum,0
+print 1
+
+;バックログ画面を呼び出す
+sYstemcall lookback
+
+return
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;選択肢のカスタマイズ
+
+;■■■■■■■■■■■■
+;選択肢設定
+*customsel
+skipoff     ;スキップを止める
+
+*csel_st
+
+;現在のテキストを取得(セーブ等で使う)
+gettext $TextLogNow
+;テキストウィンドウをエフェクトのときにも表示させたままにする
+erasetextwindow 0
+
+btndef clear
+
+getcselnum %TextSelectionNum   ;選択肢の個数を取得する文を追加
+getcursorpos %x,%y             ;選択肢表示位置
+
+;二つ目以降の選択肢を表示するために改行時のY座標増加分を算出
+mov %TextSelectionPitchY,%TextWindowFontSizeY+%TextWindowFontPitchY
+
+
+
+;■■■■■■■■■■■■
+;選択肢１〜３決定
+cselbtn 0,500,%x,%y
+if %TextSelectionNum = 1 goto *csel_lp
+add %y,%TextSelectionPitchY:cselbtn 1,501,%x,%y
+if %TextSelectionNum = 2 goto *csel_lp
+add %y,%TextSelectionPitchY:cselbtn 2,502,%x,%y
+if %TextSelectionNum = 3 goto *csel_lp
+
+;■■■■■■■■■■■■
+;選択肢カスタマイズのボタンループ
+*csel_lp
+selectbtnwait %BtnRes    ;選択肢ボタンウェイト
+
+;選択肢決定
+if %BtnRes>=500 & %BtnRes<=504 saveon:sub %BtnRes,500:cselgoto %BtnRes
+
+;マウスホイール上入力
+if %BtnRes=-2 systemcall lookback:goto *csel_lp
+
+;「右クリックメニュー」右クリック
+if %BtnRes=-1 systemcall rmenu:goto *csel_st
+if %BtnRes=-10 systemcall rmenu:goto *csel_st
+
+;「バックログ画面」マウスホイール上入力
+if %BtnRes=-2 systemcall lookback:goto *csel_st
+
+;それ以外の入力は選択肢カスタマイズのボタンループに戻る
+goto *csel_lp
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;実行ブロック
+*start
+;textspeeddefault
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;常時確保のスプライトを登録
+
+;スプライトを初期化
+csp -1
+
+;クリック待ちアイコンをスプライト登録
+lsph TextCC1SpNum,":1/3,160,2;cursor0.bmp",0,0
+lsph TextCC2SpNum,":1/3,160,2;cursor1.bmp",0,0
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;テキストウィンドウ設定
+
+;■■■■■■■■■■■■
+;テキストウィンドウの設定値
+mov %TextWindowFontSizeY,26
+mov %TextWindowFontPitchY,2
+
+;■■■■■■■■■■■■
+;テキストウィンドウ設定
+setwindow 31,16,35,25,16,16,0,2,20,1,1,#999999,0,0,639,479
+
+!sd
+
+;デバッグ用のスペース
+
+
+
+
+
+
+
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;タイトルロゴ
+
+bg white,11
+
+bg "bg\logo.jpg",11
+
+wait 1500
+bg white,11
+
+goto *modoru
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;全ての選択肢がここに行き着きます
+
+*modoru
+
+mp3loop "bgm\hanabira.mp3"
+
+bg white,12
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;メニュー出現
+
+;ボタン画像を定義
+btndef "bg\title2.jpg"
+
+;■選択ボタンのボタン定義
+btn 1,278,270,95,44,278,270
+btn 2,268,314,115,45,268,314
+btn 3,278,359,95,44,278,359
+btn 4,278,403,95,45,278,403
+
+bg "bg\title1.jpg",16
+
+*else
+
+btnwait2 %0
+
+if %0=0  goto *else
+if %0=-1 goto *else
+if %0=1  btndef "":goto *hajime
+if %0=2  goto *totyu
+if %0=3  gosub *omake1
+if %0=4  goto *owari
+
+goto *else
+
+
+*title
+
+;ボタン画像を定義
+btndef "bg\title2.jpg"
+
+;■選択ボタンのボタン定義
+btn 1,278,270,95,44,278,270
+btn 2,268,314,115,45,268,314
+btn 3,278,359,95,44,278,359
+btn 4,278,403,95,45,278,403
+
+bg "bg\title1.jpg",14
+
+*else2
+
+btnwait2 %0
+
+if %0=0  goto *else
+if %0=-1 goto *else
+if %0=1  btndef "":goto *hajime
+if %0=2  goto *totyu
+if %0=3  gosub *omake1
+if %0=4  goto *owari
+
+goto *else2
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;タイトル画面からのロード
+*totyu
+
+systemcall load
+goto *title
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;終わるとき
+*owari
+
+csp -1
+bg white,17
+wait 1500
+end
+
+
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;タイトル画面の終わり
+*hajime
+
+csp -1
+playstop
+
+
+mov %10,0
+mov %20,0
+mov %30,0
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;1. Exegesis
+bg black,11
+wait 1000
+
+bg white,11
+
+*pro
+mov $PreviewComment,"`Exegesis"
+
+mp3loop "bgm\mydear.mp3"
+
+bg "bg\tegami.jpg",13
+
+
+br
+br
+br
+br
+`Tôi ghét từ "dễ thương".@
+br
+`Nhưng tôi lại thích từ "lạ thường".@
+br
+br
+`Tôi không thích mỗi lần bạn mở nhật kí rồi viết: "Hôm nay nóng đến nỗi ..."@
+br
+`Tại tôi thích mùa này mà.@
+br
+br
+`Tôi ghét tiếng ồn.@
+br
+`Nhưng khi đó là tiếng ồn trong một cuộc tranh luận nảy lửa, Tôi lại không bận tâm đến nó nhiều.\
+
+
+br
+br
+`Tôi ghét những kẻ cố hạ bệ bạn bằng những lời cay đắng và hành động thô tục..@
+br
+`Nhưng tôi yêu những người âm thầm giúp đỡ bạn ngay cả khi bạn không xứng đáng.@
+br
+br
+`Tôi ghét bị gọi là "thằng khờ".@
+br
+`Nhưng tôi thà làm một thằng khờ còn hơn là một người sử dụng tài năng thiên phú để lợi dụng người khác.@
+br
+br
+`Tôi ghét phải làm việc cần cù.@
+br
+`Nhưng cái mà tôi lại càng ghét hơn đó chính là sự lười biếng.@
+br
+br
+`Tôi rất ghét khi bạn đổ lỗi cho người khác về những thất bại của mình.@
+br
+`But I love it when you keep moving forward no matter what.\
+
+br
+br
+br
+br
+br
+br
+br
+`I hate the fact that soon you'll be gone, never to return.@ 
+br
+br
+br
+br
+`So these are my last words of love to you ...@
+br
+br
+br
+br
+`... my last letter.\
+
+
+wait 2000
+bg white,16
+
+bg "bg\opning.jpg",16
+wait 2500
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;2. Homecoming
+bg black,11
+wait 1000
+
+bg white,11
+
+*kise
+mov $PreviewComment,"`Homecoming"
+
+mp3loop "bgm\after.mp3"
+wave "se\semi.wav"
+bg "bg\p8150057.jpg",13 
+
+
+
+`I got off the train.@
+br
+`And was greeted by a rush of air so warm I could feel myself melting away.@
+br
+`Summer.  Of course.@
+br
+`Not the the hottest day on record.  But plenty hot enough.@
+br
+`I wiped my brow.  Took one step.  Then another.  Couldn't let this weather get me down.\
+
+wave "se\WhistleA@08.wav"
+wait 2000
+
+`A gigantic mechanical whistle pierced the still air and shook me where I stood.@
+br
+`The train was leaving.  Its restless slumber was no more.@
+br
+`But I did not watch it go.@
+br
+`I just sighed.\
+
+`The train vanished into the distance.  So did the sound.@
+br
+`I could hear the cicadas in chorus -- faintly, as if I were underwater.  The places inside me were drowning -- in silence.@
+br
+`Things are alive when they're in motion.  When they die, they stop moving.@
+br
+`But I was standing still.  In darkness and silence.  Standing still.@
+br
+`So I took one step.  Then another.  Past the cracked paint and splintered wood.  Out of this old abandoned train station.\
+
+
+bg "bg\11.jpg",13 
+
+
+`It was bright.  Too bright.  I had to squint.@
+br
+`I brought a hand up to shield my face.  Rather: it came up by reflex.@
+br
+`But it wasn't any protection.  I could imagine the sun laughing at my feeble attempts.\
+
+`I felt -- rather than heard -- something rustle to the ground.@
+br
+`I looked down.  My bag had opened slightly.@
+br
+`And there was a letter at my feet.@
+br
+`The paper was yellow and crackling.  It had seen better days.@
+br
+`A keepsake.  From long ago.  From my childhood.  A voice.@
+br
+`Someone's voice ...\
+
+`I picked the letter up.  Carefully put it back in my bag.@
+br
+`"Finally," I said to myself, "I've come back."@
+br
+`Come back from the distant cityscapes of Tokyo, where the buildings touched the sky and the power lines ensnared the sun.@
+br
+`Come back from the only life I knew, filled with lights and intersections and the voices of strangers.@
+br
+`Come back to a place without air conditioners or cell phone reception.@
+br
+`Come back home.\
+
+`"What am I doing here?"@
+br
+`But there was no one to answer me.@
+br
+`"Damn, it's hot ..."@
+br
+`Still no luck.\
+
+`A summer day.@
+br
+`Just like this one.@
+br
+`Eight years ago.@
+br
+`Late at night.  A phone call.@
+br
+`That's where it all began.@
+br
+`Without warning.@
+br
+`Without a trace ...\
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;3. Reminiscence
+bg black,11
+wait 1000
+
+bg black,11
+
+*kai
+mov $PreviewComment,"`Reminiscence"
+
+mp3loop "bgm\bgm_172.mp3"
+`I can still remember how the phone sounded when it rang that night.@
+br
+`I was wide awake by the third ring.@
+br
+`I remember feeling cold.  Real cold.  Even though it was summer.@
+br
+`I could hear my Mom say, "hello?" into the phone.@
+br
+`Softly.  She didn't want to wake me.@
+br
+`But it was too late for that.@
+br
+`I remember looking at the clock.  It was around midnight.@
+br
+`I was young.  I was waiting for what would happen next.\
+
+`Mom said, "Who is this ... oh, why hello.  Yes, this is she."@
+br
+`Her voice was so slow.  And so far away.@
+br
+`But not far enough for me to miss what she said next.\
+
+`"He's ... passed away?"@
+br
+`I almost jumped out of bed.\
+
+`Because I was young.  Very young.  But not young enough to have no idea what "passed away" meant.@
+br
+`I broke out in a cold sweat.  Blood drained from my face. I got dizzy all of a sudden.@
+br
+`It was like the earth had split apart under my feet.  I was in free fall.\
+
+`Like I said.  I was young.  Very young.  Young enough to understand.@
+br
+`That it really was this simple.@
+br
+`When you die, you can't meet your friends and family anymore.@
+br
+`When you die, you can't be on this earth anymore.@
+br
+`When you die, your spirit isn't in your body anymore.@
+br
+`When you die, you stop moving.@
+br
+`I couldn't see or smell or hear or taste anything anymore.  The world whipped around me -- was I standing still now?\
+
+`It was forever.@
+br
+`Mom came to me.  Eventually.  The world stopped spinning.@
+br
+`But what she said set my world ablaze.\
+
+`"Listen, Takahiro, listen closely ... Daddy saved a boy from being hit by a car ... and the boy is safe, but Daddy is ... he's gone now.  He's dead ..."@
+br
+`She said everything so slowly.  Searching deep inside herself for the right words.@
+br
+`I was searching, too.  But I had no words.  Right or wrong.@
+br
+`There was nothing in front of me.  There was nothing behind me.  Just pure darkness -- or pure light.\
+
+`I remember that Mom said a few other things to me then.  But I don't remember what they were.@
+br
+`She left.  I kept crying.@
+br
+`Crying and crying until I had no more tears left to shed.\
+
+`I don't remember how long it was until I came to.@
+br
+`He was dead.@
+br
+`I was still alive.  I don't know if I felt sad.  But I know I felt scared -- and alone.  Something was eating into me and I couldn't escape.\
+
+`Sometime that night, I fell asleep.@
+br
+`It was heavy and dreamless.@
+br
+`So I would forget everything ...\
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;4. Country Road
+bg black,11
+wait 1000
+
+bg white,11
+
+*saka
+mov $PreviewComment,"`Country Road"
+
+wave "se\semi.wav"
+mp3loop "bgm\after.mp3"
+bg "bg\nature81.jpg",13 
+
+
+`Fifteen minutes.  The station was far behind me.@
+br
+`The sun was merciless.  There wasn't a part of me that wasn't covered with sweat.\
+
+`... I belong here, huh.@
+br
+`What a thought.@
+br
+`My old hometown.  Faces and places from a time long gone.  My time, no doubt?@
+br
+`No, not at all.@
+br
+`I shook my head.@
+br
+`Big drops of sweat showered down onto my clothes and the ground.@
+br
+`My clothes were so soaked that they must have weighed triple their dry weight.@
+br
+`Uncomfortably warm.  And sticky.\
+
+
+bg "bg\p1010012.jpg",13
+
+`Several kilometers out now.  At the foot of a hill.@
+br
+`A few more minutes up the hill, and I'd be at my parents' place.@
+br
+`"It's been a long time since I did this," I muttered.\
+
+`Now, this path had three large curves in it on the way up.@
+br
+`And two large caves.@
+br
+`Bomb shelters, for all I knew.  The darkness within pooled at their entrances.  The light of day had no way in.@
+br
+`I couldn't help but suppress a shiver.  No matter how old I was -- I could never quite get over the weird feeling.\
+
+`Back when we were kids, our parents told us all sorts of things about those caves -- that bears lived there, for instance, or that the ghosts of long-dead soldiers had taken up residence therein.@
+br
+`All lies, of course.  But effective ones.  For children.@
+br
+`I believed them all.\
+
+`I walked up the slope slowly.  It was tough going.  I could feel the burn in my thighs.@
+br
+`Each step grew easier than the last.  Familiar sights and sounds surrounded me.  And soon enough -- the end was in sight.\
+
+
+bg "bg\373.jpg",13 
+
+`Then something struck me.  "Right," I said to myself, "and on the hilltop there's ..."@
+br
+`... actually, it WASN'T there anymore.@
+br
+`Back in the old day, a mailbox used to stand on this spot.@
+br
+`Now there were only rice paddies and farming fields as far as the eye could see.  Plus this road.@
+br
+`A lonely place.  Made you want to go forward.  Or go back.  But you couldn't stay here.@
+br
+`Those were your choices.  No matter where you went.\
+
+`This was also where I'd received the letter.@
+br
+`That reminded me.  I opened up the bag, looked inside.@
+br
+`Was it still there?  Yes, it was.  Good.  After dropping it at the station, I wasn't about to make that mistake again.\
+
+`Man.  This letter.@
+br
+`Despite my best efforts, it was dry, frayed at the edges, crumbling away.@
+br
+`I stared at it for a moment.@
+br
+`And sighed.\
+
+`The sun continued its merciless assault on me.@
+br
+`I put the letter back in my bag.  It was time to make my way home.@
+br
+`I could see clouds filled to bursting high overhead.  They weren't far away.@
+br
+`And they were making ominous noises.\
+
+bg "bg\07.jpg",13 
+
+`"Very soon, then," I said, shaking my head.@
+br
+`The south wind whispered past me.@
+br
+`It spoke of rain.\
+
+playstop
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;5. Evening Rain
+bg black,11
+wait 1000
+
+bg white,11
+
+*yuu
+mov $PreviewComment,"`Evening Rain"
+
+bgm "se\ame3.ogg"
+
+bg "bg\01.jpg",13 
+
+
+`The wind wasn't lying, either.@
+br
+`So I picked up my pace.\
+
+`Everything was soaked by the time my parents' place came into view.@
+br
+`Everything except my bag -- that was waterproof.  Thank goodness.@
+br
+`Everything around me was the same.  Yet it was not.  The rain changed things.  Somehow.@
+br
+`For instance, it had soaked my already sweat-soaked T-shirt through and through.@
+br
+`Making my clothes as heavy as my spirits.\
+
+`I ran for dear life toward the front door.  I saw that it was open.  There was someone standing there.@
+br
+`Mom.\
+
+`"It's me, Takahiro!" I yelled.  "I've come home!"@
+br
+`But Mom couldn't hear me.@
+br
+`The cicadas had nothing to do with it; they'd been silent ever since the rain had started.@
+br
+`The rain, however -- was more than loud enough to make up for that.@
+br
+`So I tried calling out again.\
+
+`"Mom, it's me!"@
+br
+`No letup in the rain.@
+br
+`But this time, Mom heard me.  Or so it seemed.  She turned toward me with a smile.@
+br
+`Except for one thing.\
+
+`Something wasn't quite right here.@
+br
+`No idea what it was, but this was really weird.@
+br
+`I felt totally out of place.  For a moment.@
+br
+`But I got over it soon enough.  Had to have been my imagination.  I rushed over to where Mom was.@
+br
+`I could smell the fragrance of incense even from this distance.\
+
+`"My, you're soaked.  Did you have much trouble getting here?" she asked as I reached her.@
+br
+`"No," I answered, "not at all."@
+br
+`Silence fell between us for a time.@
+br
+`Because I couldn't find a way to break it.@
+br
+`First time I'd seen her in years.  There were shadows in her face.  And lines.  Neither of which I remembered.\
+
+`"Um, I'm kinda tired now," I managed, "so would you mind if I got some sleep?"@
+br
+`"Oh, of course not; go ahead -- there are blankets in your room," Mom replied with her usual smooth smile.@
+br
+`So I quickly changed my clothes, and headed into my old room.\
+
+bgm "se\ame2.ogg"
+
+bg black,11
+
+`The room was exactly as I'd left it.@
+br
+`I laid out the blankets.  Then I laid myself out on them.@
+br
+`A sigh escaped from my lips.@
+br
+`All that tiredness I'd accumulated since the train ride started draining away into the darkness.\
+
+`The rain wasn't letting up anytime soon.@
+br
+`I felt alone inside it.  It surrounded me.  It cocooned me.@
+br
+`And it guided me into slumber.\
+
+bgmstop
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;6. Altar
+bg black,11
+wait 1000
+
+bg white,11
+
+*butu
+mov $PreviewComment,"`Altar"
+
+mp3loop "bgm\itu_p.mp3"
+
+`The birds were twittering when I awoke.@
+br
+`Very charming.@
+br
+`I got up out of bed and headed out of my room.\
+
+bg "bg\07.jpg",13 
+
+`No more rain.  The sun was out in full force.@
+br
+`And when I closed my eyes I could feel the rays soaking through my eyelids.@
+br
+`"Oh, Takahiro," Mom said, "a good day, isn't it?"@
+br
+`I turned to face her, only to find her smiling at me -- with a broom in her hands.\
+
+`I smiled back.  "Yeah, sure.  You're up early, Mom."@
+br
+`And honestly, that was my first thought.@
+br
+`But Mom wasn't having any of it.  "Don't be silly.  It's already noon, dear."@
+br
+`Oh.  Oops.\
+
+`I looked outside.@
+br
+`No wonder the sun was so bright.  And so high in the sky.  Oops.\
+
+`"Then why didn't you wake me up?" I asked sleepily.@
+br
+`"Ahaha," she replied, "it ... didn't feel right, that's all."@
+br
+`I didn't feel right, either.  There was this ... sadness in her voice.@
+br
+`But it went as quickly as it came.  The smile was back on her face in seconds.\
+
+`"I'm just surprised, see," Mom continued, "that you didn't even pay your respects to Father before you went to sleep last night.  And you didn't even tell me you were coming in the first place!  What's going on here?"@
+br
+`Her face wrinkled over -- this time with concern.@
+br
+`I stayed quiet for a while.  It seemed like forever.  I could feel the sun beating down on me.@
+br
+`"... oh, right," I said with a smile, "might as well go say hi."@
+br
+`And I walked past Mom.@
+br
+`I could hear her murmuring about how hopeless I was behind my back.  I ignored her.\
+
+bg "bg\c5.jpg",13 
+
+`I walked through the corridor.  The flooring creaked under my feet.@
+br
+`The altar room wasn't far away.  I stopped at the door.\
+
+mp3loop "bgm\bgm_093.mp3"
+
+`"It's been years, hasn't it?" I whispered.@
+br
+wave "se\husuma1.wav"
+wait 1500
+
+`The door slid open smoothly, and came to rest with a snap.@
+br
+`The scent of burning incense wafted into my nostrils.\
+
+wave "se\husuma2.wav"
+wait 2000
+
+`I closed the door behind me.@
+br
+`No matter how many times I did this, it sent chills down my spine.@
+br
+`After all: what place did I have in a room whose master would never return?\
+
+`The entire room was still.  I sat cross-legged before the altar.@
+br
+`The atmosphere was indescribable -- quiet and solemn.  It twisted inside me like a knife.  Or perhaps it chose to.@
+br
+`For my part, I chose to stare at the picture of the deceased.\
+
+`Who chose to stare back at me with a smile.  And without blinking.@
+br
+`I sat there in silence for a time.@
+br
+`"Good to see you," I finally managed, "mind if I stay awhile?"\
+
+`The stillness of the room was a bit much.  It was heavy.  It settled on the ground like a chunk of dead air.  I could feel it press down on me.@
+br
+`But I remained sitting.@
+br
+`I wonder why.  Maybe it was because something was making me.@
+br
+`Or maybe because I wanted to.@
+br
+`I'd never know.\
+
+`I did know this: I could not call this man "Dad" or "Father".@
+br
+`But I had no idea why.  Or since when.@
+br
+`Sometimes, it felt like it had been a long time.  Other times, it felt like just yesterday.\
+
+`... or maybe it was because I didn't come here often enough.@
+br
+It didn't matter.  I hadn't seen him alive in so many years.  And I never would.@
+br
+`It didn't matter what I called him anymore.@
+br
+`He'd never answer me either way.@
+br
+`We'd never get to talk ever again.\
+
+`So I lit an incense stick.  I rang the bell.@
+br
+`And I put my hands together.@
+br
+`Empty motions and rituals.  No emotions behind them.@
+br
+`Lather, rinse, repeat.  Like some laughable automaton.\
+
+`Right.  This was all laughable.  Myself included.@
+br
+`Not rebellious.  Not impudent.  Those would have been fine.@
+br
+`Just laughable.  And ridiculous.@
+br
+`Suddenly, I did not feel like staying in this mausoleum any longer.  I left soon thereafter.\
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;7. Variable
+bg black,11
+wait 1000
+
+bg white,11
+
+*sen
+mov $PreviewComment,"`Variable"
+mp3loop "bgm\bgm_265.mp3"
+
+`We had somen for lunch that day.@
+br
+`Tamagoyaki, cucumbers, and sesame oil on the side.@
+br
+`Simple food, simply made.  Tasty.  Nostalgic.  Just like when I was a kid.@
+br
+`I mentioned this to Mom.  She just laughed.\
+
+bg "bg\c2_2.jpg",13 
+
+`I found myself back in the room I'd once called mine.@
+br
+`So much smaller than I remembered.@
+br
+`Darker.  I could smell the sunlight splintering into dust on the shadows.@
+br
+`Not a thing had changed in 19 years.  At least where this room was concerned.@
+br
+`And I liked it this way.@
+br
+`The smell -- the size -- the darkness -- everything.@
+br
+`The only sanctuary of an only child.@
+br
+`I could still remember the day I was told that this room was mine.  I was so excited I couldn't go to sleep.\
+
+`My very own place.@
+br
+`My very own space.@
+br
+`My very own castle.@
+br
+`My invincible fortress.@
+br
+`... except for the times my mom came and made me clean my room.@
+br
+`I hated it.  I used to fight and argue.  I was a spoiled brat back then.@
+br
+`Were all kids so much trouble when they were growing up?  Or was it just me?\
+
+`My old desk was over in the corner.  It was just as I'd left it.  Without a master to call its own.@
+br
+`So I pulled out the chair.  Sat down.  There, desk.  Your master is back.@
+br
+
+wave "se\kishimi1.wav"
+wait 1000
+
+`The wood creaked.  Too late.  I just remembered -- this chair was uncomfortable.@
+br
+`And some things -- like this -- never change.\
+
+`Some time passed.  I started wondering what was for dinner.  The sound of approaching footsteps grew louder and louder.@
+br
+
+wave "se\husuma1.wav"
+wait 2000
+
+`My door slid open.  I looked to see who it was.  My mom looked back at me with a smile.\
+
+`She had the western sky at her back.  The setting sun poured vague shadows all over her.@
+br
+`Thin as a knife.  Quiet as a dagger.  But always so soft.  That was Mom for you.@
+br
+`"So," she said, "I'm going off to visit Father's grave.  Would you like to come?"@
+br
+csel "`1. Sure, I'll go.",*iku,"`2. No, I don't think so.",*ikann
+
+*iku
+;選択肢１
+
+`"I see ... that's wonderful," she replied gently.\
+goto *sen3
+
+*ikann
+;選択肢２
+
+`"Really?  But you've got nothing to do here," Mom chided me, "and besides, what would Father think?"@
+br
+`Her voice was soft and entreating.  There was a bit of a frown on her face.@
+br
+`"Oh, fine, Mom," I finally replied, "you win.  I'll come with you."@
+br
+`When I got up, Mom smiled.@
+br
+`And said that I was just like him.@
+br
+`That didn't make me very happy.\
+goto *sen3
+
+*sen3
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;8. Mother and Son
+bg black,11
+wait 1000
+
+bg white,11
+
+*bosi
+mov $PreviewComment,"`Mother and Son"
+
+mp3loop "bgm\bgm_193.mp3"
+bg "bg\1284.jpg",13 
+
+
+`The sun was low.  Our shadows were long.@
+br
+`Night's curtain spilled like a woman's hair over the lay of the land.@
+br
+`Falling.  Always falling.  It would be dark soon.\
+
+`Mom walked with small steps, as she always had.@
+br
+`Always?  Really?  When I was younger one of her steps was two or three of mine.@
+br
+`But now the situation was reversed.@
+br
+`She asked me questions: all the same ones.  How was Tokyo?  How was I doing?@
+br
+`Was I okay on money?  Was work going okay?  How about my studies?  Was I feeding myself right?@
+br
+`Same old, same old.\
+
+`But it wasn't.  You couldn't call it that.@
+br
+`How do you put it?  Deep down inside it hurt.@
+br
+`Because I'd never exchanged this many words in person with Mom before.\
+
+`We reached the grave.@
+br
+`Mom burned some incense.  She set down a new bouquet of flowers.  She washed down the gravestone.@
+br
+`Her hands glided through the air with practiced grace.@
+br
+`While mine just held our bags and supplies.  Without practice.  And without grace.@
+br
+`How often did she come here?  Everything she did looked choreographed.  Well-performed.@
+br
+`But this was no performance.  I could tell.  I saw more truth in the movements of her little fingers than in all the holy books of the world.\
+
+`I didn't quite know how to put it.  It ate away at me.  Mom was always so gentle.@
+br
+`And I was not.  How could it be?  How could our attitudes toward the man be so different?@
+br
+`But then Mom stood bolt upright and did something ... remarkably ungraceful.@
+br
+`Her face twisted in pain.\
+
+She cried out.@
+br
+`As did I.@
+br
+`I raced to where she stood, and caught her in my arms before she fell.@
+br
+`So she'd stubbed her toe or something on the gravestone.\
+
+`"C'mon, Mom," I said, "watch out for those things ... wait, you've twisted your ankle.  Can you stand?"@
+br
+`"Hmm ..." she replied, "ow ow ow ow!"@
+br
+`Obviously, she couldn't.  So I made her sit.@
+br
+`"Uh, Mom," I said, shaking my head, "you sure you're okay?  That was awfully clumsy of you ..."@
+br
+`"Ahaha, sorry about that," she answered with an apologetic smile.\
+
+`So I muttered, "I guess I have no choice."@
+br
+`I turned my back to her, squatted down, and motioned for her to get on.@
+br
+`I could hear her say, "oh, I'll be fine ... ow ow ow!"@
+br
+`I snorted, "come on now, don't be stubborn.  It'll be easier this way."@
+br
+`"Hmm," she replied playfully, "I guess I'll just rely on your strong arms."@
+br
+`She positioned herself on my back. I could feel her clutching my shoulders.  She was hurting.  Obviously.\
+
+playstop
+
+`"And up we go," I announced.@
+br
+`Whoa.@
+br
+`The moment I stood with her on my back, everything became clear.@
+br
+`I could feel Mom whisper something to me -- an apology, maybe, or an endearment.@
+br
+`She sounded so far away.\
+
+`I felt like crying.  How did it come to this?@
+br
+`A wave of nausea almost overtook me.  I choked it back down.@
+br
+`This just wasn't right, man.@
+br
+`What had I been doing, all this time?@
+br
+`What had made me so blind and deaf that I never stopped to notice this?\
+
+`... Mom ...@
+br
+`... tell me ...@
+br
+`... all your life ...@
+br
+`... and mine ...@
+br
+`... were you always ...@
+br
+
+mp3loop "bgm\summer-orgel.mp3"
+
+`... this light and fragile?\
+
+`I tried to say something.  I failed.@
+br
+`Mom asked me if something was the matter.@
+br
+`There was such warm concern in her voice.@
+br
+`All I could manage was "oh, s-sorry, you okay with holding the bags?"@
+br
+`Mom laughed at that.  Told me that she could handle that much.  And that she felt nice and safe.@
+br
+`I could feel her smile against my back.@
+br
+`So apparently, I was the only one who was embarrassed about this situation.\
+
+`The sun was low.  Our shadows were long.@
+br
+`But where there had once been two, now we were one.@
+br
+`Our pace was slow.  I didn't mind that.\
+
+`I wanted to do something.  Say something.  Apologize to the woman I was carrying on my back.@
+br
+`Who had carried me in her belly.@
+br
+`Who had grown me into adulthood.@
+br
+`Who had grown so light.  So frail.  So mortal.@
+br
+`Now that it was too late.\
+
+`So I stammered, "S-sorry I never did more for you.  I ... haven't been a very good son ..."@
+br
+`"Huh?" Mom replied, "What in the world are you talking about, Takahiro?"@
+br
+`I kept my mouth shut.  I felt -- rather than heard -- Mom sigh.  We were silent for a long time.  Then she sighed again, and said,@
+br
+`"For someone so smart, you're awfully dense."@
+br
+`I could only manage a surprised "huh?" to that.@
+br
+`I mean, what else could I have said?\
+
+`"You must be blind -- can't you see?  You've done so much.  The fact is, you're here.  The fact is, you've come back to see me.  The fact is, you're carrying me.  The fact is ... you're a wonderful son.  No mom in the world could ask for more."@
+br
+`Great.  Now I wouldn't be able to say anything all night.\
+
+`I couldn't see Mom -- of course; I was carrying her on my back.  But I didn't have to.@
+br
+`Because I knew.@
+br
+`I could feel her smiling.  Smiling wide.@
+br
+`Because she knew.@
+br
+`That she'd won.\
+
+
+bg "bg\1287.jpg",13 
+
+`We were quiet now.  Peaceful -- like the warmth in our hearts.@
+br
+`The last sunlight of the day drizzled through the low-hanging clouds.  Everything was awash.  Including us.@
+br
+`I heard Mom whisper, "it's so beautiful ..."@
+br
+`And I replied, "yeah ..."\
+
+`Mother and son.@
+br
+`Reunited at last, after so long.@
+br
+`Because no matter how little we'd talked to each other ...@
+br
+`... we were family.@
+br
+`No matter where we were ...@
+br
+`... we were connected.\
+
+`We were home in a few moments.@
+br
+`The most precious moments in my life.@
+br
+`The past was the past.  Something to cherish.@
+br
+`Every day.@
+br
+`But the present was the present.@
+br
+`Something to live for.@
+br
+`Every day.\
+
+wait 2000
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;9. Relict
+bg black,11
+wait 1000
+
+bg black,11
+
+*kako
+mov $PreviewComment,"`Relict"
+
+`Mom was sound asleep by the time we got back home.@
+br
+`So I put her to bed as gently as I could.  She didn't wake up.@
+br
+`I smiled wryly.  I knew what this meant, after all -- no dinner for me tonight.@
+br
+`I hung around my room for a bit, but it was still too early to sleep.\
+
+mp3loop "bgm\bgm_265.mp3"
+
+`I walked out into the dark.@
+br
+`No idea where I was going.  But that was okay.  My feet knew where to take me.@
+br
+`"Right," I muttered, "how about the shrine?"@
+br
+`The one and only playground in the entire village was located there.  Lots of good memories.@
+br
+`So why not?\
+
+bg "bg\p9270013.jpg",13 
+
+`Everything was as I remembered.@
+br
+`The sun had vanished; the moon was high up in the sky, its cold light splintering across the land.@
+br
+`Not a single cloud in sight; here and there, the stars punched holes of light in the veil of darkness overhead.\
+
+`There was rain.@
+br
+`It just never stopped around here, did it?@
+br
+`I looked up.  I could see the droplets whispering through the misty air.\
+
+`The red arches of the shrine came into view.@
+br
+`And then, the long stairway.@
+br
+`I remembered those steps very well; I used to trip and fall on them all the time when I was a kid.@
+br
+`Talk about dangerous.  Children bounce, after all.  But if I took a spill like that now, bones would break.@
+br
+`The thought made me smile.\
+
+`Now, how many steps were there?@
+br
+`Sixty-eight, if I remembered correctly.@
+br
+`Well, time to see.@
+br
+`Why not keep a running tally?  Might be fun.@
+br
+`And so I started climbing the steps.@
+br
+`Humming as I went.\
+
+playstop
+
+`I stopped about halfway.@
+br
+`Because I'd started to regret this adventure.@
+br
+`It was pouring now.  Couldn't even see ahead of me that well.@
+br
+`The stairs were getting slicker by the second.@
+br
+`And the dirt trail I'd navigated to get here was turning into a muddy mire.@
+br
+`Now what?@
+br
+`I sighed, and started up the next step.@
+br
+`But suddenly there was only air to meet me ...\
+
+`I screamed.@
+br
+`I remember that.@
+br
+`There were lots of loud noises.  Lots of bumps.  Pain.@
+
+wave "se\tentou1.wav"
+bg black,1
+br
+`And a terrible crash.\
+
+bgm "se\ame3.ogg"
+
+`I couldn't see anything anymore.@
+br
+`The rain was drumming down on me.@
+br
+`And there was something heavier -- runoff, pouring down the stairs and onto me.@
+br
+`All sorts of thoughts shot through my head.@
+br
+`Was this the end?@
+br
+`Was I going to die here?@
+br
+`Help ...\
+
+wait 4000
+
+bgmstop
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;10. Intersect
+bg black,11
+wait 1000
+
+bg white,11
+
+*sou
+mov $PreviewComment,"`Intersect"
+
+wave "se\semi.wav"
+
+`"Ow ow ow ow ow," I moaned.@
+br
+`But the sun wasn't in any mood to show mercy.@
+br
+`"Stop shining, dammit!"@
+br
+`But the sun wasn't in any mood to listen.\
+
+bg "bg\p1010011.jpg",13 
+mp3loop "bgm\after.mp3"
+
+`I looked around.@
+br
+`First of all, it was really bright out.@
+br
+`Second of all, the sun was high in the eastern sky.@
+br
+`So it was morning.@
+br
+`A BAD morning.\
+
+`Then I tried to move.@
+br
+`Horrible pain shot through every part of my body.@
+br
+`Correction: a VERY BAD morning.@
+br
+`I couldn't even move!@
+br
+`Okay, so obviously I'd fallen down the stairs.  Well, duh ...@
+br
+`I'd really been out cold for this long, then?\
+
+mp3loop "bgm\child_dream.mp3"
+
+`"Hmm?" I murmured.@
+br
+`I looked over to my left; sure enough, the stairway ... oh wait a second.@
+br
+`That wasn't the stairway, that was this kid.@
+br
+`A kid who looked more than a little familiar, at that.@
+br
+`"Hey, that's funny," he said with a smirk, "What are you doing sleeping in a place like this, mister?  Need some help?"@
+br
+`So not only was he a kid, he was a rotten brat.  Great.@
+br
+`"Hah," I replied in kind, "I don't think I need any help from the likes of you."\
+
+`Except ... uh ... I really WAS having a hard time getting to my feet.@
+br
+`"For crying out loud, man!" I yelled.@
+br
+`As hard as I was trying, I couldn't seem to muster the strength to do anything.  The kid just stood there with his mouth wide open.@
+br
+`Then, in as diplomatic a voice he could muster, he said, "Um, mister?  Are you retarded?"@
+br
+`Yeah.@
+br
+`That's one way of putting it.\
+
+`"Um," I finally said with a sigh, "would you mind helping me up?"@
+br
+`No two ways about it.@
+br
+bt
+`"Sure, be happy to," the kid replied cheerfully.@
+br
+`He grasped my hand.@
+br
+`His was so small.@
+br
+`But it was strong enough -- he jerked me to my feet almost by himself.\
+
+`"Thanks, kid," I said with a big smile.@
+br
+`I was on my feet, he was feeling good for helping someone, win-win situation, right?@
+br
+`"You owe me," he retorted, "how about ice cream?"@
+br
+`WHAT?@
+br
+`"C'mon, mister," the kid went on cheerfully, "quit that zombie grin already.  Besides, it's hot out, and I'm starved."\
+
+`Damn, kid!  Don't be dissing my smile!  Any more and I'll feed you to the zombies.  For REAL!@
+br
+`"Uh, no," he shot back, "zombies don't exist.  For REAL."@
+br
+`WAIT, I SAID ALL THAT OUT LOUD?!@
+br
+`I was so embarrassed I wanted to die on the spot.\
+
+`"D-damn it," I managed, "this just isn't my day.  First I fall, and now I'm being blackmailed by a brat ..."@
+br
+`But the brat cut me short: "hey, mister."@
+br
+`"What do you want now?" I snorted back.@
+br
+`"Stop calling me a brat, will you?  I've got a NAME, you know."@
+br
+`He stared up at me.@
+br
+`Great, now what?  A staring contest?@
+br
+`If it was, then I lost in short order: "All right, fine.  What's your name?"\
+
+`"Ahaha," he said with a smug grin, "that's Takahiro Watanabe to you!"@
+br
+`This would have been fine, except for the way that every single part of his little body was bursting with pride.  What in the world?@
+br
+`So I shrugged and said, "um ... okay, I guess ..."@
+br
+`But he just continued, entirely undeterred: "And since you're gonna ask anyway, my favorite shape is an ellipse, my favorite measurement is 30 cm, and my least favorite food is tofu, because I almost choked to death on a piece once."\
+
+`Um, no, I wasn't going to ask at all.@
+br
+`Except one thing struck me.  I hated tofu too.  For the same reason.@
+br
+`"All right, now it's your turn, mister!" the brat ... err ... Takahiro exclaimed, "... aaaaaaaand ... ACTION!"@
+br
+`Great.  Now he was playing make-believe video camera operator.@
+br
+`"Um, okay," I started, "I'm, uh ..."@
+br
+csel "`1. Takahiro Watanabe",*wat,"`2. Rintarou Mahatake, if you please",*ma,"`3. M.C. Hammer, yo!",*koba
+
+*ma
+;選択肢２「馬畑倫太郎」
+
+`Takahiro folded his arms, closed his eyes, and nodded serenely.@
+br
+`"Yes, yes sir," he intoned, "that's nice.  Very elegant ... and very not true.  So what's your REAL name, huh, Mister?"@
+br
+`My mouth fell open.@
+br
+`How did he know?\
+
+`"You know," he contined, "I do that too -- whenever I tell a lie, I start talking funny.  In that way, we're the same."@
+br
+`The same, huh.\
+
+`He knew.@
+br
+`I was just going on a hunch here.@
+br
+`I had a feeling that he knew ... everything.@
+br
+`What I liked, what I disliked, my good habits, my bad habits.@
+br
+`No.  This wasn't just a hunch.\
+
+`Because he wasn't "more than a little familiar".@
+br
+`I sighed, turned to him, and finally said, "Takahiro.  Takahiro Watanabe."\
+
+goto *wat
+
+*koba
+;選択肢３「小早川キャシー」
+
+`... um, if there's anyone in the world who would fall for a lame gag like this, then I'm a mongoose.@
+br
+`"Whoa!" Takahiro said in surprise, "you're a FOREIGNER?!"@
+br
+`Apparently, I'm a mongoose.\
+
+`Takahiro was looking up at me with newfound respect.  "So tell me, Mr. Hammer," he asked excitedly, "where do you come from?"@
+br
+`"Asia," I replied.@
+br
+`"Ooh, Asia!" he exclaimed.@
+br
+`Well, whatever.  Wasn't as if I was lying or anything.@
+br
+`"And the name of your country?" Takahiro went on.@
+br
+`"Tama Plaza," I shot back.@
+br
+`"Ooh," Takahiro said with wonder, "Tama Plaza!  How exotic!"@
+br
+`No, that's just the train station close to where I live in Tokyo.\
+
+`Takahiro looked about ready to jump for joy by now: "man, this is my lucky day!  Gotta tell all my friends about this!"@
+br
+`(... now what?)@
+br
+`Better tell him the truth before this spun out of control.@
+br
+`"... actually," I said with a sigh, "my name's Takahiro.  Takahiro Watanabe."\
+
+goto *wat
+
+*wat
+
+`Takahiro's eyes widened.  For a moment he looked lost.  But only for a moment.@
+br
+`Then he sprang back: "whoa, we've got the same name!  That's awesome!  Hey Big Guy, I got an idea -- mind if I just call you ... Big Guy?"@
+br
+`Fair enough -- one Takahiro Watanabe was headache enough, let alone two.\
+
+`"Heh," I shot back, "looks like you're going to do it whether I like it or not."@
+br
+`Just like your standard annoying little brother.  Well, I wouldn't know -- I didn't have a little brother in real life -- but hey.  Close enough.@
+br
+`Close enough to, uh, want to tussle his hair.@
+br
+`What was WRONG with me today?\
+
+`"Okay, done deal," Takahiro (Little Guy?) said gleefully, "now c'mon home with me!"@
+br
+`I totally didn't expect this: "Wha-?  What deal?  Why do I have to go with y- whoa!"@
+br
+`But it was too late -- Little Guy had already grabbed my hand.  He seemed quite intent on DRAGGING me to his destination if I didn't go willingly.\
+
+`Two Takahiros, hand (Little Guy) in hand (Big Guy).@
+br
+`That was how we met.@
+br
+`In a world full of wonders.\
+
+bg "bg\11.jpg",13 
+
+`The pain from my fall was gone now, washed away like yesterday's rain.@
+br
+`There were no more clouds in the sky now -- just a blazing gold sun and blasting waves of heat.@
+br
+`I could hear cicadas in chorus -- faintly, as if I were underwater.@
+br
+`My inner shadows melted away in the beginning of this new summer day.\
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;11. Union
+bg black,11
+wait 1000
+
+bg white,11
+
+*kita
+mov $PreviewComment,"`Union"
+
+
+bg "bg\373.jpg",13 
+
+mp3loop "bgm\dreamy.mp3"
+
+
+`The path was long.  The sun was blazing.  The air was unbearably hot.@
+br
+`And we were idiots.@
+br
+`Idiot One (Little Guy) skipped ahead, oblivious to it all ...@
+br
+`... while Idiot Two (Big Guy) trudged behind, cursing the fact that he had a motorcycle license and no motorcycle to use it on at this moment.\
+
+`We reached the hilltop.  There was a mailbox here.@
+br
+`... I knew where I was.\
+
+`I also knew it was hot as hell.@
+br
+`The air shimmered around me, making it impossible to see very far into the distance.@
+br
+`But unfortunately for me, "into the distance" was exactly where we were headed.@
+br
+`Little Guy kept skipping ahead, oblivious to the heat.  I kept sweating.  Panting hard.@
+br
+`And no, not in a dirty way.  I really WAS about to die here.@
+br
+`Not that it mattered.  I knew where we were going.@
+br
+`Home.@
+br
+`Little Guy's home.  Not mine.  Yet.\
+
+`We eventually struck up a conversation.@
+br
+`You know.  A single-serving give-and-take for a single-serving generation.@
+br
+`Single servings of a whole bunch of things, as a matter of fact.  I was impressed at Takahiro's penchant for wild tales.@
+br
+`About mysterious explosions at remote temples, or about how an entire village vanished.@
+br
+`About how there was a secret weapons factory deep in the mountains, or about how he'd seen fairies not 15 cm tall flying about.@
+br
+`Little Guy kept at it for a long time, so long that I thought nothing serious would ever come from his lips.  But then, suddenly, he asked me a question.\
+
+`"So, Big Guy," he said, "tell me about your family?"@
+br
+`"Huh?" I managed, "My family?  Well, let's see ..."@
+br
+`I thought about it for a while.  How was I supposed to answer this?@
+br
+`Well, I guess technically my family didn't exist in this ... place.@
+br
+`I chose my words with care: "My mom's the only family I have.  My old man's dead -- he passed away back when I was a little kid.  I don't remember much about him."@
+br
+`"Oh ..." Takahiro murmured, "I didn't know.  Sorry, Big Guy ..."@
+br
+`I waved his apology off.  "Not your fault.  No worries."\
+
+`...@
+br
+`Whoa.  This was no ordinary kid I was dealing with here.@
+br
+`Quick to read into the hearts of others, and clear in thought and purpose (or was I just tooting my own horn?).@
+br
+`I turned to Takahiro and asked lightly, "Well, enough of that -- how about you?"@
+br
+`Except I really wanted to know.@
+br
+`About how he felt about his mom.@
+br
+`About how he felt about his dad.@
+br
+`And so I waited.\
+
+`"Well," he said, "I've got a mom and a dad ..."@
+br
+`He trailed off here, an expression close to sadness flitting across his small face.@
+br
+`That expression broke my heart.@
+br
+`So I quickly asked, "hey, something the matter?"@
+br
+`"Yeah," he managed, "well, uh, really, it's just me and Mom.  See, Dad's never at home ... I mean, for crying out loud, he's not even at home on weekends.  And y'know what?  I don't remember the last time he took us out on a vacation.  Because he never HAS."\
+
+`I was afraid of this.@
+br
+`Because I was exactly the same.@
+br
+`(I guess one thing hasn't changed over time, then ...)@
+br
+`I had almost no memories of my old man -- good or bad.@
+br
+`So I waited for him to speak on.\
+
+`I didn't have to wait long:@/
+` "But still, I love Dad.@/
+`  See, there's always a note on my desk when I wake up.@/
+`  Like a Post-It, y'know.  He always writes me something.@/
+`  'Stay healthy', or 'how are your studies', or 'be good to your mother', stuff like that.@/
+`  Not much, huh ...?  No, actually, it's plenty.  He does it every morning, without fail.@/
+`  And so I know ... how much he's thinking of me every day."\
+
+`And I thought:@
+br
+`Only a kid would say such a thing.@
+br
+`Only a kid would say such a thing.  Yes.@
+br
+`But.@
+br
+`Only a kid could make me remember: his warmth.  His gentleness of spirit.  My old man -- my father.@
+br
+`Why'd it take me this long?  I should have known better ...@
+br
+`... now that there was no way we'd meet again.\
+
+`This wasn't supposed to be happening, was it?@
+br
+`Why now, of all times?@
+br
+`This wasn't fair.  This just wasn't fair.@
+br
+`Just like when I carried Mom on my back.@
+br
+`Why didn't I ever grasp anything until it was too late?@
+br
+`Why didn't I ever grasp anything until all that was left was silent regret?@
+br
+`My poor parents.\
+
+`"Hey," Takahiro piped up, "you okay, Big Guy?"@
+br
+`The next thing I saw was his concerned face, right in front of mine.@
+br
+`Well, no, I couldn't really see him that clearly -- too many tears in my eyes.@
+br
+`So instead I said: "there's still enough time, right?"\
+
+`"Huh?" Little Guy replied.@
+br
+`"Yeah," I continued, "would you mind introducing me to your dad?"@
+br
+`His eyes widened a bit at this.  But a moment later, he flashed me a dazzling smile and said,@
+br
+`"Sure, absolutely!  He might be late from work, though."@
+br
+`"Then I'll just have to stay for a few days, huh?" I shot back.@
+br
+`Little Guy grinned, gave me a thumbs-up, and hollered, "ROCK ON!"@
+br
+`I burst out laughing.@
+br
+`And a moment later, so did he.\
+
+bg "bg\11.jpg",13 
+
+`Our laughter was huge, and the summer sky was huger still.@
+br
+`The echoes soared up, higher and higher, until they disappeared altogether.@
+br
+`Down here on this earth, it was the beginning of sunset -- and our shadows kept us company as we walked.\
+
+`Now I get it, I said to myself.@
+br
+`Now I know why I'm here.@
+br
+`Time for me to meet my old man, face to face.@
+br
+`And to tell him -- just once: "thank you for having been my father."\
+
+bg "bg\1284.jpg",13 
+
+`The dying sun blazed overhead, coloring the sky with explosions of red and orange.@
+br
+`We were right next to Takahiro's house now.  I stopped at the doorway and took a moment to look around.@
+br
+`It was like nothing ever changed.  I knew this landscape by heart.@
+br
+`How the mountains reached toward the sky.  How the sky soared high and laughed.  How the sunset colors flooded into the gaps where the hills met the air.  Hallowed ground, all of it.\
+
+`"Hey Big Guy," Takahiro urged, "don't just stand around, come in, come in!"@
+br
+`I snapped out of space cadet mode and managed a smile.@
+br
+`I walked through the door and whispered,@
+br
+`"I'm home ..."\
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;12. Repast
+bg black,11
+wait 1000
+
+bg black,11
+
+*shoku
+mov $PreviewComment,"`Repast"
+
+
+`A familiar smell wafted past my nostrils.@
+br
+`Croquettes for dinner, huh?@
+br
+`Little Guy complained mightily, but the expression on his face made it clear he was really quite happy about the menu.@
+br
+`Then she noticed me standing there.@
+br
+`"Oh, Takahiro, you've brought a guest?" she asked gently.@
+br
+`"Uh ... nice to meet you ... ma'am.  My name's Takahiro Watanabe ..."@
+br
+`"Ahaha," she laughed, "why, you and my son share a name!  Fancy that.  Are you friends?"@
+br
+`I smiled back.  "I guess so ... though to be honest we just met today."@
+br
+`Why was I feeling so shy?\
+
+`She didn't seem suspicious of me at all.  Instead, she said, "my, it's so late already?  Tell me, do you have any plans for tonight?"@
+br
+`I knew what she was going to say next.  Something along the lines of 'why not stay the night?  I'd be pleased if you could' for sure.@
+br
+`"No, not particularly ...", I said.  Well, it was an honest answer.@
+br
+`"Why not stay the night?" she responded without missing a beat, "I'd be pleased if you could ..."@
+br
+`I snickered to myself: hah, bullseye!  Do I get a prize for this?@
+br
+`"Here you go," she said cheerfully, placing a croquette in the palm of my outstretched hand.@
+br
+`I almost jumped out of my skin: "hot hot ho- ... err, actually, it's not."@
+br
+`The croquette was only pleasantly warm -- not scalding hot -- and neatly wrapped in wax paper.\
+
+`I took a bite.@
+br
+`And almost spat it out when Takahiro exclaimed "YUMMY!"@
+br
+`"Uh," I managed (after I'd swallowed, of course; never talk with your mouth full!), "but you haven't even taken a bite yet!"@
+br
+`"So what?" he shot back, "it's still YUMMY!"@
+br
+`Mom just smiled again: "now now, we've got plenty, so don't be fighting now, boys."@
+br
+`... um, Mom, that's not quite the point ...\
+
+`That didn't really matter, though; I loved Mom when she got like this.@
+br
+`Sure, she was so much younger -- close to MY age, even -- but you couldn't find that brand of warmth and gentleness anywhere else on this Earth.@
+br
+`And I loved it when she smiled, as she was smiling now.@
+br
+`Yes.  I was starting to feel like an archaeologist ...@
+br
+`... uncovering a memory here, the outline of a feeling there ...@
+br
+`... as I traveled through this strange and beautiful world.@
+br
+`There wasn't much I could claim to understand anymore.  But one thing was clear: if there was anything good and pure inside me, it was to be found right here.\
+
+`We talked a lot over dinner, the three of us.@
+br
+`She kept asking me questions, so I kept answering them -- totally different from my banter with Takahiro earlier today.@
+br
+`About whether it was hard living alone, or about whether I had enough money, or about my part-time job, or about my studies, or about whether I was getting enough sleep.@
+br
+`Weird, wasn't it ...@
+br
+`... that the things she worried about never changed ...\
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;13. Father and Son
+bg black,11
+wait 1000
+
+*husi
+mov $PreviewComment,"`Father and Son"
+
+
+`Takahiro went to bed at nine.@
+br
+`After that, the house grew peaceful and still.@
+br
+`But a few hours later, at eleven, I heard someone opening and closing the front door.@
+br
+`"Honey, I'm home," I heard a man's voice call out.@
+br
+`And I heard Mom say in reply, "welcome home."@
+br
+`His voice was strong.@
+br
+`And it sounded a lot like mine.@
+br
+`Man, talk about complicated.\
+
+`I heard footsteps: first in the corridor, then coming closer and closer to me.@
+br
+`And for some reason, my heart started beating faster.@
+br
+`He came into view.  He'd taken his jacket off and was carrying it in one hand.@
+br
+`He'd loosened his necktie, but his shirt was still neatly tucked into his pants.@
+br
+`His eyes widened when he saw me for the first time.  Then, with a "well, what have we here?" he walked over to where I was and sat next to me.@
+br
+`"No rush on dinner," he called out to Mom, before turning to me and saying:\
+
+`"Good to ... see you.  Nice to meet you, rather.  I'm Takahiro's dad -- the name's Ichigi."
+br
+`Such a kind voice from such a tired man.@
+br
+`And one that set me all on edge.@
+br
+`I hesitated for a second.  Then I managed: "Um, uh, nice to meet you.  I'm Takahiro Watanabe ..."@
+br
+`Father had an odd look on his face.  I had no idea what was going through his head at that moment.@
+br
+`"I see," he muttered softly.@
+br
+`He turned his gaze on me again, as gently as ever.@
+br
+`As I said before, I had no idea what was going through his head.  But it didn't take a genius to see that something was bothering him.\
+
+`"Now," he said after a short silence, "I don't really know where I'm going with this, but -- mind if I ask you something?"@
+br
+`"S-sure, go ahead," I stammered back.@
+br
+`"Do you, uh, by any chance, uh, happen to be ... my son?  From the future?"@
+br
+`I was rendered totally speechless.@
+br
+`I mean, who would ever believe such a thing?  It happened in comic books, or in dreams.@
+br
+`Apparently Father here would.  And apparently he'd accept this -- and me -- with open arms.@
+br
+`My God.@
+br
+`"Um ..." I finally managed, "I ... uh ... think so."@
+br
+`I gave him a weak smile.@
+br
+`He just nodded and said, "okay, I understand."\
+
+`We had a few drinks together, munched on some snacks.  We did a bunch of stuff, I guess.  But mainly we talked.@
+br
+`Talked about what I was up to in the present, about what his work was like, about Little Guy, about Mom.@
+br
+`Before long, Father mentioned that he'd have to return to work soon.@
+br
+`Man, and he'd just come home ...@
+br
+`"Wow," he said with a smile, "I've stayed longer than usual.  Good to have guests every once in a while."@
+br
+`Now I could see why Little Guy never saw Father in the flesh.\
+
+`Father was a policeman.@
+br
+`Yeah, yeah, I'd always known that on an intellectual level.  But I'd never really understood what that entailed up until today.@
+br
+`And while I still didn't totally get it, it was obvious that he felt called to his line of work.@
+br
+`Even if it meant risking his life from time to time ...@
+br
+`... at least, those were his words.\
+
+`"What a busy man ..." I muttered.@
+br
+`The house was silent now.  Mom was obviously asleep.\
+
+`But before long, I heard a noise at the door.@
+br
+`I went to look, and to my surprise -- it was Father.@
+br
+`"Something wrong?" I asked.@
+br
+`Yeah," he replied, "I almost forgot."@
+br
+`Such a kind smile on his face.\
+
+`Father motioned for me to follow him, and then silently made his way into Little Guy's room.@
+br
+`And then he took a scrap of paper out of his pocket.@
+br
+`It had something written on it.\
+
+`"Be nice to Big Guy."@
+br
+`(A memo pad.  Notes.  Handwriting.  Wait a second ...)@
+br
+`He'd do this, every day, without fail, for me.  Some new pearl of wisdom every morning.  I remembered now.@
+br
+`Father looked back at me and said,@
+br
+`"You're a lot like I was when I was your age.  Straightforward, easy to read, can't tell a lie.  Tough, isn't it?"@
+br
+`That gentle smile was back on his face.\
+
+`Father looked forward, into the darkness, toward the slumbering Little Guy.@
+br
+`And then he started to recite the words that I knew by heart.\
+
+`"I hate the word 'cute'.@/
+`  But I love the word "interesting".@/
+`  I hate it when you open up your diary and write: 'It was so hot today that ...'@/
+`  But I love the season itself.@/
+`  I hate loud noises.@/
+`  But when they're voices raised in heated argument, I don't mind them so much.@/
+`  I hate those who tear you down with their words and actions.@/
+`  But I love those who quietly build you up even when you don't deserve it.@/
+`  I hate being called a 'simpleton'.@/
+`  But I'd rather be a simpleton than someone who uses his God-given talents to take advantage of others.@/
+`  I hate working hard.@/
+`  But I hate laziness so much more than that.@/
+`  I hate it when you blame others for your failings.@/
+`  But I love it when you keep moving forward no matter what.@/
+`  These are my words of love to you ..."\
+
+`"W-what was that?" I managed after I'd picked my jaw up from off the ground.@
+br
+`He grinned and replied, "my manifesto, of course.  Pretty cool, isn't it?"@
+br
+`"Yeah ..." I said, still stunned.@
+br
+`"See, I write something for him everyday," he pointed to Little Guy and explained, "so I get lots of practice writing."@
+br
+`Um, Father?  To be honest, you don't have much literary talent.  That isn't what blows me away.  It's that you just recited the contents of your letter to me ...\
+
+`But I don't WANT literary talent or anything like that.  It doesn't matter.@
+br
+`Those are your words.  That's enough for me.\
+
+`Father left for good after that.@
+br
+`Better living through hectic living, I guess ...\
+bg "bg\p9270013.jpg",13 
+
+`After I saw Father off at the door, I stayed out for a while, looking up at the sky.@
+br
+`The world was awash in silver light, reflecting from high above.@
+br
+`And the moon shone on and on, as if such an act would fill the universe with a sense of obligation.\
+
+wait 3000
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;14. Reunion
+bg black,11
+wait 1000
+
+bg white,11
+
+*huta
+mov $PreviewComment,"`Reunion"
+
+mp3loop "bgm\itu_p.mp3"
+
+
+`Morning came.@
+br
+`The third morning I'd seen since I'd come back home to the countryside.@
+br
+`And the second morning I'd seen since I'd come back to the past (?).@
+br
+`Why did I get this feeling that as busy as Father was, *I* was the one in the real bind here?\
+
+bg "bg\c2_2.jpg",13 
+wave "se\husuma1.wav"
+wait 2000
+
+`The door opened.@
+br
+`No change of clothes, so I was about ready for another action-packed (?) day in the past (?) as I was.@
+br
+`But Mom stuck her head in, smiled, and said,@
+br
+`"Oh, I'll wash your clothes for you, so give them to me when you can, okay?"@
+
+br
+csel "`1. Thank you very much.",*domo,"`2. I don't have a change of clothes, so ...",*ie
+
+*domo
+goto *sen2
+
+*ie
+goto *sen2
+
+*sen2
+
+`Before I even managed to finish my sentence, Little Guy popped out of nowhere with something in his hands.@
+br
+`"TA-DA!" he yelled.@
+br
+`Father's clothing ...@
+br
+`"Hey, Big Guy," Little Guy continued with a smile, "change into these, whaddaya say?"@
+br
+`"Ooh, thanks a lot!" I accepted with a smile.@
+br
+`And then I remembered something from earlier this morning.\
+
+`"Be nice to Big Guy."@
+br
+`(Everything makes sense now ...)@
+br
+`So after they left, I washed up and changed.\
+
+bg white,11
+
+`Little Guy and I spent all day together after that.@
+br
+`From dawn until dusk.@
+br
+`We had somen for dinner.@
+br
+`Tamagoyaki, cucumbers, and sesame oil on the side.@
+br
+`Ravishingly cold -- and ravishingly delicious -- for a hot summer day.@
+br
+`Little Guy started getting drowsy after we'd filled our bellies to bursting.  After he was sound asleep, I walked outside.\
+
+mp3loop "bgm\bgm_265.mp3"
+bg "bg\p9270013.jpg",13 
+
+`"The nights are nice and cool here," I commented, half to myself.@
+br
+`I walked along the road briskly.@
+br
+`Soon enough, I came across a face that I knew well by now.@
+br
+`In this world awash with silver light, reflected from high above.@
+br
+`Father.\
+
+`"Ah, so you came out to meet me," he said casually.@
+br
+`"Ahaha, no," I retorted, "I was just out on a walk."@
+br
+`Father just laughed and slapped me on the back with approval.@
+br
+`It hurt like hell.\
+
+`So strong.  So straightforward.  And so loving.@
+br
+`I'd been such a fool for all this time.@
+br
+`How had I so completely misunderstood him?@
+br
+`How had I so completely missed the fact that he was a good -- a great -- man?@
+br
+`The moon's silver light flooded down on us as I pondered on this -- and as we started on the road back home together.\
+
+playstop
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;15. Event Horizon
+bg black,11
+wait 1000
+
+bg black,11
+
+*jike
+mov $PreviewComment,"`Event Horizon"
+
+`I must have been tired that night.@
+br
+`Maybe I wasn't paying attention.  Maybe I was lulled by the still of night.@
+br
+`There was a disaster.@
+br
+`A car with only one headlight on came barreling toward us at top speed.@
+br
+`There were embankments to either side.@
+br
+`Father was the first to react.@
+br
+`"Takahiro!" he yelled, "Get out of the way!"\
+
+wave "se\maouse-clash.wav"
+
+`I felt a terrible crash.@
+br
+`That was Father, pushing me as hard as he could.  I tumbled down the embankment.@
+br
+`I felt a terrible crash.@
+br
+`That was Father, hurled like a ragdoll through the air.\
+
+`And like a horrible movie playing in slow motion ...@
+br
+`... without a stop button in sight ...@
+br
+`... Father's body crumpled onto the ground, twitched, and was still.\
+
+`I felt myself screaming.@
+br
+`Father, Father, Father.@
+br
+`As I rushed to his side.@
+br
+`My feet got tangled in something.  I fell hard.  It hurt like hell.  I got back up.  Nothing was going to stop me now.\
+
+`Father was right ahead of me now.@
+br
+`There was blood everywhere, on his body, soaking the ground.@
+br
+`Not even the moon's silver light could hide or gloss over this hideous red.\
+
+`It was then that everything became clear.\
+
+mp3loop "bgm\hanabira.mp3"
+
+`There was no more future for Father now.@
+br
+`(Is he going to die now?  Is this how it ends?)@
+br
+`Yes, Takahiro.@
+br
+`This is how it ends.\
+
+`"F-Father ..."@
+br
+`All these thoughts were crashing through my head.  I didn't know anything anymore.@
+br
+`My eyes were too heavy with tears for me to see anything.@
+br
+`So I felt, rather than saw, Father smiling up at me as he said,@
+br
+`"Thank you ... Takahiro ..."@
+br
+`"What?" I croaked.@
+br
+`"This ... is the first time ... you've ever called me ... Father ..."\
+
+`"Oh ..." I managed.  It was about all I could say.@
+br
+`"I always knew," he whispered, his voice getting weaker by the moment, "that you wanted to spend time with me.  Sorry ..."@
+br
+`I grabbed his hand.  Words failed me.@
+br
+`"You've made your father very happy, my son ..." he continued, "you've grown to be such a splendid ... young man ..."@
+br
+`He smiled weakly.\
+
+`"WHY'D YOU DO IT?!" I cried out, "WHY'D YOU SAVE ME?!"@
+br
+`"WHAT KIND OF MAN WOULDN'T GIVE HIS LIFE FOR HIS SON?!" he yelled back with the last kernel of his strength.@
+br
+`"It's not fair!" I screamed.@
+br
+`We'd both yelled at each other now.@
+br
+`Me in grief and loss.@
+br
+`And him in love and kindness.@
+br
+`Such love and kindness that I couldn't understand it.\
+
+`Father coughed, letting out a gout of blood.@
+br
+`There was nothing I could do now.@
+br
+`"... I ... have a request for you," Father whispered, all spent now.@
+br
+`"Wha- ..." I managed, startled.@
+br
+`My voice was quavering.@
+br
+`I was doing everything I could to keep myself from crying.@
+br
+`Maybe I'd convinced myself that maybe -- just maybe -- if I didn't cry, things might turn around.@
+br
+`But Father already knew better.@
+br
+`"... this is the end of the road .. for me ..." he murmured, "I know my body, my son ..."@
+br
+`"No way!" I yelled back, "You're going to be okay!"\
+
+`"Takahiro ... thank you ..." he whispered with a smile.@
+br
+`There was so much blood everywhere.@
+br
+`The most horrifying sight I'd ever seen.@
+br
+`But Father ... he just kept smiling.@
+br
+`"... will you ... do what I say ...?" he continued.@
+br
+`"... anything," I replied.@
+br
+`(I'm NOT going to cry, damn it!)\
+
+`"... tell Mom ... that I died doing my job ... so Mom ... and Little Guy ... will be able to accept it ... do this ..."@
+br
+`He wanted me to tell a lie.@
+br
+`For MY sake.@
+br
+`"... and more importantly ... give Little Guy ... your words.  Your words are mine ... you're the only one who can do this ..."@
+br
+`"I ... I ..." I stammered, "okay, Father."@
+br
+`I didn't have the wherewithal for words anymore.\
+
+`Don't cry, don't cry, don't cry, don't you dare cry.@
+br
+`I kept repeating that to myself as if it were some kind of spell or incantation.@
+br
+`I shut my eyes as tightly as I could to make sure no tears would fall from my eyes.@
+br
+`But it was far too late for that.\
+
+`"Be ... a straight shooter, my son ... laugh loudly when you're happy ... and cry loudly when you're sad ... that's the only honest way ... and know ... that no man could have asked ... for a better son."@
+br
+`Father said, that same gentle smile on his face.@
+br
+`"Me too!  Father!  I'm so lucky to have a Father like you!"@
+br
+`And I did as he commanded.@
+br
+`I cried out.  I screamed.  I yelled.@
+br
+`At the top of my lungs.@
+br
+`From the bottom of my soul.\
+
+`And as I did that ... Father's grasp on my hand grew weaker and weaker.@
+br
+`Until, at last ...@
+br
+`... the gentle light of his mortal soul flickered, faded, and disappeared.\
+
+`I knew it was too late.@
+br
+`But it didn't matter.  I started saying things to him.  Things that would stay with me for the rest of my life.  Things that I had to say.\
+
+`"Father ... I'm going to become a man like you."@
+br
+`"I'm going to make sure to take the words you wrote for me to heart.  They'll be my treasure."@
+br
+`"I don't want to be without you.  And Mom doesn't want to be without you too."@
+br
+`"C'mon, Father!"@
+br
+`"Get up, c'mon, wake up!  I swear, now I understand everything!"\
+
+`And after that, it was all tears.@
+br
+`Tears and cries so loud that I felt like my lungs would be ripped out.@
+br
+`I couldn't stop this if I tried.@
+br
+`No.  I couldn't even try.  Only someone more distant to his Father than I'd become could claim something like that.@
+br
+`I wept because I was sad.@
+br
+`I was sad because I loved my Father.@
+br
+`That was all that was within me.\
+
+
+`It took a long time before I calmed down.@
+br
+`But when I did, I realized that there was something I had to do.@
+br
+`"... let's do this," I whispered.@
+br
+`Because I wasn't helpless.@
+br
+`There was something I had to do.@
+br
+`Had to.\
+
+bg "bg\p9270013.jpg",13 
+
+`The moon shone down, flooding the land with the same silver light.@
+br
+`But now the only shadow around was mine.@
+br
+`Father's was ended.@
+br
+`Cut short at the beginning of summer.@
+br
+`The evening winds tore at my body with eerie force.@
+br
+`And a cold winter chill knifed through my heart.@
+br
+`Forever ...\
+
+wait 3000
+
+playstop
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;16. The Letter
+bg black,11
+wait 1000
+
+bg white,11
+
+*tega
+mov $PreviewComment,"`The Letter"
+
+bg "bg\11.jpg",13
+
+`The next morning, Father lay in state at home.@
+br
+`Under thick blankets, even though it was the middle of summer.@
+br
+`Any life that had been in his body was now ended.@
+br
+`But his smile would never end.@
+br
+`Yes, he was still smiling.@
+br
+`Inside my heart.@
+br
+`Smiling forever and ever.\
+
+`And so I wrote a letter.@
+br
+`A letter for Takahiro.@
+br
+`In Father's words.@
+br
+`In my words.\
+
+`My handwriting was so much like Father's.@
+br
+`There were three things he'd charged me with.@
+br
+`One of them was done: I'd already told Mom what had happened.@
+br
+`Now it was time for me to carry out the other two.@
+br
+`So I picked up my pen and wrote.\
+
+mp3loop "bgm\mydear.mp3"
+bg "bg\tegami.jpg",13
+
+
+br
+br
+br
+br
+`I hate the word "cute".@
+br
+`But I love the word "interesting".@
+br
+br
+`I hate it when you open up your diary and write: "It was so hot today that ..."@
+br
+`But I love the season itself.@
+br
+br
+`I hate loud noises.@
+br
+`But when they're voices raised in heated argument, I don't mind them so much.\
+
+
+br
+br
+`I hate those who tear you down with their words and actions.@
+br
+`But I love those who quietly build you up even when you don't deserve it.@
+br
+br
+`I hate being called a "simpleton".@
+br
+`But I'd rather be a simpleton than someone who uses his God-given talents to take advantage of others.@
+br
+br
+`I hate working hard.@
+br
+`But I hate laziness so much more than that.@
+br
+br
+`I hate it when you blame others for your failings.@
+br
+`But I love it when you keep moving forward, no matter what.\
+
+br
+br
+br
+br
+br
+br
+br
+`I hate the fact that soon you'll be gone, never to return.@ 
+br
+br
+br
+br
+`So these are my last words of love to you ...@
+br
+br
+br
+br
+`... my last letter.\
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;17. Partings
+bg black,11
+wait 1000
+
+bg white,11
+
+*ribe
+mov $PreviewComment,"`Partings"
+
+mp3loop "bgm\tamsi10.mp3"
+bg "bg\1284.jpg",13 
+
+`I came to Takahiro shortly before evening.@
+br
+`I told him that Father's funeral would be in the morning.@
+br
+`And I began to execute the third and last command Father had given me.\
+
+`"Li- ... no, Takahiro -- mind if we talk?"@
+br
+`"... okay," he replied.@
+br
+`There was no energy in that voice.@
+br
+`And his eyes were red-rimmed and full of tears.@
+br
+`He'd probably been crying since late last night.@
+br
+`He'd probably not slept, either.  He must have been exhausted.\
+
+`... and I didn't blame him.  I wasn't in much better shape.@
+br
+`How could it be?@
+br
+`How could I forget Father's love, his strength, his greatness -- just because he passed away?\
+
+`We walked out of the house and down the road.  We didn't exchange a word.@
+br
+`The cicadas were in full chorus around us.@
+br
+`I stopped at the top of the hill, next to the postbox.  Then I turned to Takahiro.@
+br
+`It was time.\
+
+`"This is your Father's will.  And this is my will.  So take this -- treasure it always.  Can you promise?"
+br
+`"... this?" Takahiro asked.@
+br
+`And he looked at the envelope I'd given him with some amount of consternation.\
+
+`"It's a letter," I explained.@
+br
+`"Yeah," he replied, "so what did he write?"@
+br
+`"Read it when you get back.  I know you'll understand," I replied coolly.@
+br
+`"... huh?" Takahiro looked at me again, now with puzzlement.\
+
+`Now I'd come full circle.  The letter of his world and the letter of my world were now one and the same.@
+br
+`But that was fine.  I'd given Takahiro everything honest that was within me.@
+br
+`And now I had one last thing left to do.@
+br
+`(Right, the shrine ...)\
+
+`I began walking away.@
+br
+`"Where are you going?" Takahiro asked plaintively, "Home's over that way, y'know."@
+br
+`I stopped walking.  I didn't turn around.\
+
+`"... I'm going home."@
+br
+`"Huh?" Takahiro yelped.@
+br
+`"I told you, I'm going home," I repeated patiently.@
+br
+`"Y-you're leaving us?!" he cried out.@
+br
+`He sounded as if I'd just told him that the end of the world had come.\
+
+`"Yeah, I'm going home," I confirmed, "tell your Mom thank you for me, will you?"@
+br
+`"No way!" he shouted, "Don't leave me!"@
+br
+`I kept my face turned away from his the entire time.@
+br
+`Because I didn't want him to see the tears running down my face.\
+
+`"Listen to me," I said as firmly as I could, "never forget that your Father loved you, you hear me?"@
+br
+`"Okay," he whispered back.@
+br
+`"And be good to your Mom, you hear?"@
+br
+`"Okay, I- ..." he managed in a low voice.@
+br
+`So I cut him off and yelled, "LOUDER!"@
+br
+`"I WILL!" he yelled back.@
+br
+`"... I believe you now," I said.@
+br
+`With a smile.  And a trace of Father's warmth.\
+
+`"Um ..." Takahiro said hesitantly, "Big Guy ...?"@
+br
+`I didn't say anything in reply.@
+br
+`No, I COULDN'T say anything in reply.@
+br
+`My time with him had been so short.@
+br
+`But in that time, we'd become such good friends -- no, more than that.  We were closer now than brothers.  I knew it to be true.@
+br
+`That was why it was so hard to leave now.@
+br
+`Finally, Takahiro continued, "... we'll ... meet again someday ... right?"\
+
+`"... yeah," I managed, "I promise."@
+br
+`(Well, I'll never meet you again, but you'll certainly meet me soon enough.)@
+br
+`And if that wasn't the truth, I didn't know what was.\
+
+bg "bg\1287.jpg",13 
+
+`The sun had pretty much set by now.@
+br
+`Now it was twilight.@
+br
+`The clouds were ablaze with the pinks and oranges of the dying day.  Just beautiful.@
+br
+`The bright red of the mailbox seemed to concentrate those colors, reaffirm them, embrace them.@
+br
+`And in the west, darkness painted the clouds with midnight blues and blacks.@
+br
+`It was going to rain soon.@
+br
+`No, that wasn't quite right.@
+br
+`It was going to do much more than just rain ...\
+
+`I finally turned to Takahiro, and said, "see you around, man."@
+br
+`Takahiro looked up and replied, "all right, bye-bye."@
+br
+`There were tears in his eyes.\
+
+`I went one way.  He went the other.@
+br
+`Slowly.@
+br
+`Slowly but surely.@
+br
+`I never turned my head to look at him after that.@
+br
+`And somehow, I knew that he never turned his head, either.@
+br
+`We now made our own footprints on the road, separate from each other.@
+br
+`To each the life he was made to live.\
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;18. Present
+bg black,11
+wait 1000
+
+bg black,11
+
+*gen
+mov $PreviewComment,"`Present"
+mp3loop "bgm\maoutamasi-boss03.mp3"
+
+`It was already raining cats and dogs by the time I got to the shrine.@
+br
+`That was the country for you -- sunny one moment, rainy the next.@
+br
+`I started walking up the stairs.@
+br
+`But I stopped when I was halfway up.@
+br
+`In other words, on the exact spot where I'd started the tumble that had propelled me into the past.@
+br
+`(All right, this should send me back to my time ... I think.)@
+br
+`Well, I didn't have much confidence in it, but this was the last thing I had to do.@
+br
+`And I wasn't about to let a little thing like implausibility stop me.\
+
+`I took a deep breath.@
+br
+`(Man, I'm excited to do this.)@
+br
+`I could feel the cold of the stone stairs seeping into my body.@
+br
+`(No, actually, I'm scared!)@
+br
+`Well, no going back now.@
+br
+`"Five ... four ... three ... two ... one ... GO!"\
+
+`I threw myself down the stairs.@
+
+wave "se\tentou1.wav"
+br
+`And landed in an unceremonious heap.@
+br
+`On my face.\
+
+`Hurt like hell, but ...@
+br
+`... uh, nothing happened.@
+br
+`That didn't work.@
+br
+`All right, one more time!\
+
+`So I climbed up the stairs again, threw myself off again ...@
+wave "se\tentou1.wav"
+br
+`... landed in an unceremonious heap again.@
+br
+`But on my nose this time around.\
+
+`Oh, man.@
+br
+`I groaned aloud.  Any harder and it would have been a massive nosebleed.@
+br
+`Was I stuck here?@
+br
+`No way I was going to let that happen.@
+br
+`All right, THIRD TIME'S THE CHARM!\
+
+`So I climbed up the stairs again, threw myself off again ...@
+wave "se\tentou1.wav"
+br
+`... landed in an unceremonious heap again.@
+br
+`Now I was in a world of pain.@
+br
+`I didn't have enough strength left even to scream.@
+br
+`Besides: my body was screaming loudly enough on its own anyhow.\
+
+`So I climbed up the st- ... never mind.  You know how this goes by now.@
+
+wave "se\tentou1.wav"
+br
+`And you know how it ends, too.@
+br
+playstop
+`All right, all right.  I give up!  This hurts too much!\
+
+*kikann
+
+`And really, I was at my limit here.  Couldn't do this anymore.@
+br
+`Nothing to it.  Time to go back.@
+br
+`As this was clearly an exercise in futility.@
+br
+`Well, maybe I'd try again tomorrow.\
+
+mp3loop "bgm\tamhi03.mp3"
+
+`I started dragging myself back to Little Guy's place.@
+br
+`But then I stopped in my tracks ...@
+br
+`... when I saw something incredible.@
+br
+`Rather, when I DIDN'T see something incredible.@
+br
+`The mailbox on top of the hill was gone.@
+br
+`My (bruised) face broke into a rueful smile.@
+br
+`I didn't know whether I was happy or disappointed with this turn of events.@
+br
+`Man, talk about mixed feelings.\
+
+bg "bg\p9270013.jpg",13 
+
+`The moon was full.@
+br
+`It hurt my eyes just to look up at it.@
+br
+`The stars twinkled faintly and faded, knowing how outclassed they were by the radiance of the moon.@
+br
+`The world was filled with silver strands of light.@
+br
+`And I rushed on home.\
+
+`Mom was waiting for me on the porch.@
+br
+`A look of worry and relief filled her face when she saw me.@
+br
+`"You've been out late, Takahiro," she said.@
+br
+`"... sorry, Mom," I managed.@
+br
+`The moment she heard my voice, Mom smiled happily.  She stayed that way for a moment, and then said, "oh, dinner is ready!  I made your favorite!"@
+br
+`For my part, I felt my lips twisting into a wry smile.  And I said the only thing that came to mind:@
+br
+`"What, not croquettes again?"@
+br
+`"Oh, silly," she giggled, "you say that every single time, but then you don't even leave a crumb."@
+br
+`I burst out laughing as well.\
+
+`I looked at her for a moment.  She was a little thinner than she was in the past, but all the important things were the same: her warmth.  Her gentleness.  Her motherly kindness.  Her love.@
+br
+`And her most beautiful smile.\
+
+`There was Mom -- crybaby, worrywart, incredible cook, warm, loving, kind.  The Mom I'd always known.@
+br
+`There was Father -- strong and straightforward, full of energy and honor.  The Father I'd never have known if not for what had happened.@
+br
+`And finally there was me -- a spoiled little brat, filled to bursting with the loving kindness of my parents.@
+br
+`I understood now.  This was family.@
+br
+`The past -- the future -- Mom -- Father -- Little Guy -- I was with my family now.@
+br
+`I was sure of it now.  I would never forget.\
+
+`I looked up at the sky.@
+br
+`The moon swayed and shimmered on its gossamer swing of stars as a gentle evening wind sang through the air.@
+br
+`It carried the unmistakable voice of autumn, gently tugging at summer's shoulder to let it know that time was up.@
+br
+`I felt like I'd lost something.  I felt like I'd gained something.  I felt all mixed-up.\
+
+`So I said: "I'm home ... Mom."@
+br
+`So she replied: "Welcome home ... Takahiro."@
+br
+`And I told myself: it was time for new footsteps, new paths.  My future would surely unfold in this world.@
+br
+`This world of so many wonders.\
+
+playstop
+
+br
+br
+br
+br
+br
+br
+br
+`This world of the letter ...\
+
+ignoreinput
+
+mp3loop "bgm\whereveror.mp3"
+wait 5000
+
+bg white,18
+wait 5000
+
+btndef "bg\roll.jpg"
+
+for %0=0 to 4035
+;↑変更します。
+
+blt 0,0,640,480,0,%0,640,480
+wait 27
+;↑変更します。
+
+next
+
+ofscpy
+wait 10000
+
+bg white,13
+wait 4000
+
+
+bg "bg\last.jpg",13
+wait 5000
+
+bg black,17
+wait 3000
+
+unignoreinput
+
+if %200 = 0 goto *ikkaime
+if %200 = 1 goto *nikaime
+
+*ikkaime
+mov %200,1
+reset
+
+*nikaime
+reset
+
+reset
+
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;おまけモード
+*omake1
+
+
+if %200 = 0 goto *zannen
+if %200 = 1 goto *omake2
+
+*zannen
+csp -1
+
+br
+br
+br
+br
+br
+br
+`No peeking yet.  Sorry.\
+
+
+csp -1
+goto *title
+
+
+
+*omake2
+csp -1
+
+*sinop
+
+;補助CGのファイル名を指定
+;mov $150,":c;cg\cat_nasi.jpg"
+
+;「戻る」ボタンのスプライト定義
+;lsp 35,":c/2,0,3;cg\cgm_btn_back.bmp",290,388
+
+;ボタン画像を定義
+btndef "cg\option_1.jpg"
+
+;■選択ボタンのボタン定義
+btn 1,274,316,106,42,274,316
+btn 2,274,365,106,42,274,365
+btn 3,274,413,106,42,274,413
+
+;隠しページへ
+;btn 6,502,24,142,22,502,24
+;↓
+;btn 7,465,407,150,41,465,408
+
+;？？？用ボタン
+;btn 8,292,268,70,26,292,268
+
+;CGモードを抜けるボタンのスプライトボタン定義
+;spbtn 35,35
+
+bg "cg\option_2.jpg",14
+
+;--------------------キャラクタ選択画面のボタンループ
+*cgm_charasel_btnlp
+
+btnwait2 %0
+
+if %0=0 goto *cgm_charasel_btnlp
+
+;右クリックで抜ける
+if %0 = -1 goto *cgm_out
+
+;ここではボタン番号1〜7選択時
+;csp 35
+if %0 = 1 goto *bgmmode
+if %0 = 2 goto *atogaki
+if %0 = 3 goto *cgm_out
+
+;■オプションを出る処理
+*cgm_out
+csp -1    ;スプライト定義をクリアする
+btndef "" 
+goto *title
+
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;音楽鑑賞
+
+*bgmmode
+
+csp -1
+
+mov %51,0
+
+
+btndef ""
+
+;ボタン画像を定義
+btndef "cg\bgmmd_1.jpg"
+
+;■選択ボタンのボタン定義
+btn 11,372,25,255,20,372,25
+btn 12,372,48,255,20,372,48
+btn 13,372,71,255,20,372,71
+btn 14,372,94,255,20,372,94
+btn 15,372,117,255,20,372,117
+btn 16,372,140,255,20,372,140
+btn 17,372,163,255,20,372,163
+btn 18,372,186,255,20,372,186
+btn 19,372,209,255,20,372,209
+btn 20,372,232,255,20,372,232
+btn 21,372,255,255,20,372,255
+btn 22,372,278,255,20,372,278
+btn 23,372,301,255,20,372,301
+btn 24,372,324,255,20,372,324
+btn 25,372,347,255,20,372,347
+btn 26,372,370,255,20,372,370
+
+bg "cg\bgmmd_2.jpg",14
+
+
+*bgmbt
+
+btnwait2 %50
+
+if %50=0 goto *bgmbt
+
+if %50=-1 goto *bgmmodeend
+
+;if %50=32 goto *bgmstop
+
+;if %50=33 goto *bgmmodeend
+
+if %50>=11 & %50<=30 goto *bgmkan
+
+
+;■音楽鑑賞しよう♪
+*bgmkan
+
+mov %52,%50
+
+if %52=%51 goto *bgmstop
+
+mov %51,%52
+
+
+if %51=11 goto *end
+if %51=12 goto *ener
+if %51=13 goto *soraniumi
+if %51=14 goto *tojita
+if %51=15 goto *komorebi
+if %51=16 goto *tokiwotukamu
+if %51=17 goto *magnifi
+if %51=18 goto *sinryoku
+if %51=19 goto *natuno
+if %51=20 goto *narusora
+if %51=21 goto *jiroji
+if %51=22 goto *omoide
+if %51=23 goto *shine
+if %51=24 goto *sorawotobu
+if %51=25 goto *sokkyo
+if %51=26 goto *toumeinao
+
+
+;■曲目
+*end
+mp3loop "bgm\dreamy.mp3"
+
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 40:csp 41:csp 42:goto *bgmkan
+
+
+*ener
+mp3loop "bgm\mydear.mp3"
+
+
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 43:csp 44:csp 45:goto *bgmkan
+
+
+*soraniumi
+mp3loop "bgm\itu_p.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 46:csp 47:csp 48:goto *bgmkan
+
+
+*tojita
+mp3loop "bgm\child_dream.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 49:csp 50:csp 51:goto *bgmkan
+
+
+*komorebi
+mp3loop "bgm\bgm_093.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 52:csp 53:csp 54:goto *bgmkan
+
+
+*tokiwotukamu
+mp3loop "bgm\bgm_172.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 55:csp 56:csp 57:goto *bgmkan
+
+
+*magnifi
+mp3loop "bgm\bgm_193.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 58:csp 59:csp 60:goto *bgmkan
+
+
+*sinryoku
+mp3loop "bgm\bgm_265.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 61:csp 62:csp 63:goto *bgmkan
+
+
+*natuno
+mp3loop "bgm\summer-orgel.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 64:csp 65:csp 66:goto *bgmkan
+
+
+*narusora
+mp3loop "bgm\wherever.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 67:csp 68:csp 69:goto *bgmkan
+
+
+*jiroji
+mp3loop "bgm\whereveror.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 70:csp 71:csp 72:goto *bgmkan
+
+
+*omoide
+mp3loop "bgm\hanabira.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 73:csp 74:csp 75:goto *bgmkan
+
+
+*shine
+mp3loop "bgm\tamhi03.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 76:csp 77:csp 78:goto *bgmkan
+
+
+*sorawotobu
+mp3loop "bgm\tamsi10.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 79:csp 80:csp 81:goto *bgmkan
+
+
+*sokkyo
+mp3loop "bgm\after.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 82:csp 83:csp 84:goto *bgmkan
+
+
+*toumeinao
+mp3loop "bgm\maoutamasi-boss03.mp3"
+btnwait2 %50
+if %50=0 goto *bgmbt
+if %50=-1 goto *bgmmodeend
+if %50=32 goto *bgmstop
+if %50=33 goto *bgmmodeend
+if %50>=10 & %50<=30 csp 85:csp 86:csp 87:goto *bgmkan
+
+;■音楽ストップ
+*bgmstop
+
+bgmstop
+mp3stop
+mov %51,0
+
+goto *bgmbt
+
+
+
+;■音楽鑑賞終了
+*bgmmodeend
+csp -1
+
+btndef ""
+
+goto *omake2
+
+
+
+
+;■■■■■■■■■■■■■■■■■■■■■■■■
+;後書き
+
+*atogaki
+csp -1
+
+bg "cg\atogaki.jpg",14
+mp3loop "0"
+wait 1000
+`Chào, Wataru đây.@
+br
+`Cho dù bạn đọc lần đầu hay đã từng đọc những tác phẩm của tôi trước đây, thì cũng xin cảm ơn vì đã đọc “Lá thư” đến cuối trang.\
+
+`Chà, bạn nghĩ sao?@
+br
+`Vì đây là bản làm lại nên đối với những ai đã đọc phiên bản gốc của tác phẩm này, kịch bản có thể không thay đổi nhiều. Nhưng nếu tác phẩm này làm bạn cảm động, hay khiến bạn thấy ấm áp trong lòng, thì điều đó sẽ khiến tôi rất vui.\
+
+`Dùng NScripter để viết lại bộ này là một trải nghiệm khá......thú vị.  Một công đôi việc luôn: trước hết, không ai có thể phàn nàn về ngôn ngữ kịch bản trước đây mà tôi sử dụng. Bởi vì tôi còn dùng nữa đâu mà phàn với chả nàn?.@
+br
+`Và thứ hai, Tôi đã có cơ hội để tập viết script trên NScripter.\
+
+`Tôi viết vĩ thanh này vào tháng Giêng năm 2007; Ban đầu tôi viết câu chuyện này vào tháng 3/2004. Cũng gần 3 năm rồi.@
+br
+`Đủ để một học sinh cấp 2 lên cấp 3, một học sinh cấp 3 lên đại học, và đủ dể một sinh viên đại học trở thành một người làm công ăn lương.  Thế có hơi lạ không ta?  À thì, không. Đấy là điều đương nhiên rồi mà nhỉ?\
+
+`Dù gì thì đó cũng là một khoảng thời gian dài.  , that the work of your hands was not in vain.@
+br
+`And as a colleague of mine who also writes visual novels once said: "I want to write new pieces.  I want to write pieces that shine in the darkness, and stand up to the very best storytelling there is in the world."@
+br
+`... man, that's grandiose.\
+
+`I can't aspire to something like that.@
+br
+`But I can hope that you enjoyed reading this piece, and that it moved you in some way.@
+br
+`And I can pray that we will meet again someday, on other pages, with new stories to tell each other.@
+br
+`So thank you once again.@
+br
+br
+br
+br
+`- Wataru, at home, on 15 January 2007\
+
+
+
+goto *omake2
+
+
+
+
+
+
+
+
