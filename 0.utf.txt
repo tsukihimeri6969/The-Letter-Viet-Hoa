@@ -640,41 +640,41 @@ br
 br
 br
 br
-`Tôi ghét từ "dễ thương".@
+`Ba ghét từ "dễ thương".@
 br
-`Nhưng tôi lại thích từ "lạ thường".@
-br
-br
-`Tôi không thích mỗi lần bạn mở nhật kí rồi viết: "Hôm nay nóng đến nỗi ..."@
-br
-`Tại tôi thích mùa này mà.@
+`Nhưng ba lại thích từ "lạ thường".@
 br
 br
-`Tôi ghét tiếng ồn.@
+`Ba không thích mỗi lần con mở nhật kí rồi viết: "Hôm nay nóng đến nỗi ..."@
 br
-`Nhưng khi đó là tiếng ồn trong một cuộc tranh luận nảy lửa, Tôi lại không bận tâm đến nó nhiều.\
+`Vì ba thích mùa này mà.@
+br
+br
+`ba ghét tiếng ồn.@
+br
+`Nhưng khi đó là tiếng ồn trong một cuộc tranh luận nảy lửa, Ba lại không bận tâm đến nó nhiều.\
 
 
 br
 br
-`Tôi ghét những kẻ cố hạ bệ bạn bằng những lời cay đắng và hành động thô tục..@
+`Ba ghét những kẻ cố hạ nhục con bằng những lời lẽ cay đắng và những hành động thô bỉ..@
 br
-`Nhưng tôi yêu những người âm thầm giúp đỡ bạn ngay cả khi bạn không xứng đáng.@
-br
-br
-`Tôi ghét bị gọi là "thằng khờ".@
-br
-`Nhưng tôi thà làm một thằng khờ còn hơn là một người sử dụng tài năng thiên phú để lợi dụng người khác.@
+`Nhưng ba tôn trọng những người âm thầm giúp đỡ con ngay cả khi bạn không xứng đáng.@
 br
 br
-`Tôi ghét phải làm việc cần cù.@
+`Ba ghét bị gọi là "thằng khờ".@
 br
-`Nhưng cái mà tôi lại càng ghét hơn đó chính là sự lười biếng.@
+`Nhưng ba thà làm một thằng khờ còn hơn là một người sử dụng tài năng thiên phú để lợi dụng người khác.@
 br
 br
-`Tôi rất ghét khi bạn đổ lỗi cho người khác về những thất bại của mình.@
+`Ba ghét phải làm việc cần cù.@
 br
-`But I love it when you keep moving forward no matter what.\
+`Tuy nhiên, sự lười biếng mới là điều mà ba ghét nhất.@
+br
+br
+`Khi con đổ lỗi cho người khác về những sai lầm của mình, Ba rất ghét.@
+br
+`Nhưng ba rất thích khi con không bỏ cuộc và tiếp tục phấn đấu.\
 
 br
 br
@@ -683,17 +683,17 @@ br
 br
 br
 br
-`I hate the fact that soon you'll be gone, never to return.@ 
+`Ba rất buồn khi biết rằng con sẽ phải đi xa nhà và không quay lại.@ 
 br
 br
 br
 br
-`So these are my last words of love to you ...@
+`Vì thế, đây là những lời yêu thương cuối cùng của ba dành cho con ...@
 br
 br
 br
 br
-`... my last letter.\
+`... lá thư cuối cùng của ba.\
 
 
 wait 2000
@@ -721,20 +721,20 @@ bg "bg\p8150057.jpg",13
 
 `Tôi bước xuống ga tàu.@
 br
-`Và được chào đón bởi một luồng khí ấm đến mức tôi có thể cảm thấy mình đang tan chảy.@
+`Và được chào đón bởi một luồng khí ấm đến mức tôi có thể cảm thấy cơ thể mình tan chảy.@
 br
 `Mùa hè là thế mà.@
 br
-`Not the the hottest day on record.  But plenty hot enough.@
+`Nay không phải là ngày nóng nhất, nhưng vẫn khá nóng.@
 br
-`I wiped my brow.  Took one step.  Then another.  Couldn't let this weather get me down.\
+`Tôi lau trán. Rồi bước một bước.  Rồi một bước nữa.  Không thể để thời tiết này cản tôi được.\
 
 wave "se\WhistleA@08.wav"
 wait 2000
 
-`A gigantic mechanical whistle pierced the still air and shook me where I stood.@
+`Một tiếng còi lớn phá tan bầu không khí tĩnh lặng, làm tôi đứng im tại chỗ.@
 br
-`The train was leaving.  Its restless slumber was no more.@
+`Tàu bắt đầu rời ga.  Its restless slumber was no more.@
 br
 `But I did not watch it go.@
 br
@@ -815,7 +815,7 @@ wait 1000
 bg black,11
 
 *kai
-mov $PreviewComment,"`Reminiscence"
+mov $PreviewComment,"`Hồi ức"
 
 mp3loop "bgm\bgm_172.mp3"
 `I can still remember how the phone sounded when it rang that night.@
@@ -906,7 +906,7 @@ wait 1000
 bg white,11
 
 *saka
-mov $PreviewComment,"`Country Road"
+mov $PreviewComment,"`Con Đường Làng"
 
 wave "se\semi.wav"
 mp3loop "bgm\after.mp3"
@@ -3185,7 +3185,7 @@ br
 br
 `Và bà ấy trả lời: "Mừng con về...Takahiro."@
 br
-`Và tôi tự nhủ: it was time for new footsteps, new paths.  My future would surely unfold in this world.@
+`Tôi tự nhủ: it was time for new footsteps, new paths.  My future would surely unfold in this world.@
 br
 `This world of so many wonders.\
 
