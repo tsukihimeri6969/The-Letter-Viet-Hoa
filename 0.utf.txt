@@ -734,15 +734,15 @@ wait 2000
 
 `Một tiếng còi lớn phá tan bầu không khí tĩnh lặng, làm tôi đứng im tại chỗ.@
 br
-`Tàu bắt đầu rời ga.  Its restless slumber was no more.@
+`Tàu bắt đầu rời ga. Khoảnh khắc chợp mắt ngắn ngủi của nó đã kết thúc.@
 br
-`But I did not watch it go.@
+`Nhưng tôi không đứng lại mà xem tàu rời ga.@
 br
-`I just sighed.\
+`Tôi thở dài.\
 
-`The train vanished into the distance.  So did the sound.@
+`Đoàn tàu, cùng với tiếng còi của nó, đi xa dần rồi mất hút.@
 br
-`I could hear the cicadas in chorus -- faintly, as if I were underwater.  The places inside me were drowning -- in silence.@
+`Tôi có thể nghe thấy tiếng ve sầu kêu đồng thanh – mơ hồ, như thể tôi đang ở dưới nước.  Những nơi bên trong tôi đang chìm đắm - trong im lặng.@
 br
 `Things are alive when they're in motion.  When they die, they stop moving.@
 br
@@ -3620,7 +3620,7 @@ br
 br
 `Đủ để một học sinh cấp 2 lên cấp 3, một học sinh cấp 3 lên đại học, và đủ dể một sinh viên đại học trở thành một người làm công ăn lương.  Thế có hơi lạ không ta?  À thì, không. Đấy là điều đương nhiên rồi mà nhỉ?\
 
-`Dù gì thì đó cũng là một khoảng thời gian dài. Đủ để tự nhủ "ta cần phải để lại đấu vết là ta đã tồn tại, để công sức từ chính bàn tay ta không uổng phí"@
+`Dù gì thì đó cũng là một khoảng thời gian dài. Đủ để tự nhủ "ta cần phải để lại đấu vết là ta đã tồn tại, để công sức từ chính bàn tay ta không uổng phí."@
 br
 'Và một đồng nghiệp của tôi cũng hay chấp bút cho tiểu thuyết trực quan từng nói: "Tôi muốn viết những điều mới. Viết những điều xé toang màn đêm, và có thể đứng vững giữa những tượng đài tự sự hay nhất thế giới"@
 br
