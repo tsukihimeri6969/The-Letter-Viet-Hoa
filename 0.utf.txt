@@ -650,7 +650,7 @@ br
 `Vì ba thích mùa này mà.@
 br
 br
-`ba ghét tiếng ồn.@
+`Ba ghét tiếng ồn.@
 br
 `Nhưng khi đó là tiếng ồn trong một cuộc tranh luận nảy lửa, Ba lại không bận tâm đến nó nhiều.\
 
@@ -659,7 +659,7 @@ br
 br
 `Ba ghét những kẻ cố hạ nhục con bằng những lời lẽ cay đắng và những hành động thô bỉ..@
 br
-`Nhưng ba tôn trọng những người âm thầm giúp đỡ con ngay cả khi bạn không xứng đáng.@
+`Nhưng ba tôn trọng những người âm thầm giúp đỡ con ngay cả khi con không xứng đáng.@
 br
 br
 `Ba ghét bị gọi là "thằng khờ".@
@@ -742,69 +742,69 @@ br
 
 `Đoàn tàu, cùng với tiếng còi của nó, đi xa dần rồi mất hút.@
 br
-`Tôi có thể nghe thấy tiếng ve sầu kêu đồng thanh – mơ hồ, như thể tôi đang ở dưới nước.  Những nơi bên trong tôi đang chìm đắm - trong im lặng.@
+`Tôi có thể nghe thấy tiếng ve sầu kêu đồng thanh một cách mơ hồ, như thể tôi đang ở dưới nước vậy. Lòng tôi bắt đầu lắng lại.@
 br
-`Things are alive when they're in motion.  When they die, they stop moving.@
+`Vạn vật quanh ta còn sống thì cử động, chết thì bất động.@
 br
-`But I was standing still.  In darkness and silence.  Standing still.@
+`Nhưng tôi thì vẫn đứng yên trong sự tĩnh lặng của cái bóng đen mờ mịt trong tôi. @
 br
-`So I took one step.  Then another.  Past the cracked paint and splintered wood.  Out of this old abandoned train station.\
+`Thế là tôi bước. Rồi tiếp bước. Qua khung cửa tróc sơn sờn gỗ. Ra khỏi khu ga tàu bỏ hoang cũ kỹ này.\
 
 
 bg "bg\11.jpg",13 
 
 
-`It was bright.  Too bright.  I had to squint.@
+`Trời nắng lắm. Nắng đến nỗi tôi phải nheo mắt lại.@
 br
-`I brought a hand up to shield my face.  Rather: it came up by reflex.@
+`Tôi đưa tay lên mặt để chắn những tia sáng kia.@
 br
-`But it wasn't any protection.  I could imagine the sun laughing at my feeble attempts.\
+`Nhưng đó cũng như không.  Tôi có thể tưởng tượng mặt trời đang cười nhạo những nỗ lực yếu đuối của tôi.\
 
-`I felt -- rather than heard -- something rustle to the ground.@
+`Tôi cảm thấy có cái gì đó rơi xuống đất.@
 br
-`I looked down.  My bag had opened slightly.@
+`Tôi nhìn xuống.  Túi đồ của tôi bị bung.@
 br
-`And there was a letter at my feet.@
+`Và dưới chân tôi là một lá thư.@
 br
-`The paper was yellow and crackling.  It had seen better days.@
+`Lá thư đó đã bị nhàu và ố vàng.  Nó đã thấy những ngày tốt đẹp hơn.@
 br
-`A keepsake.  From long ago.  From my childhood.  A voice.@
+`Lá thư đó là một vật kỷ niệm từ rất lâu rồi. Từ thời tôi còn bé. Không chỉ thế, nó còn là một giọng nói.@
 br
-`Someone's voice ...\
+`Giọng nói của một người ...\
 
-`I picked the letter up.  Carefully put it back in my bag.@
+`Tôi nhặt lá thư lên và cẩn thận cất nó vào túi.@
 br
-`"Finally," I said to myself, "I've come back."@
+`“Cuối cùng thì,” tôi tự nhủ, “mình đã về.”@
 br
-`Come back from the distant cityscapes of Tokyo, where the buildings touched the sky and the power lines ensnared the sun.@
+`Trở về từ khung cảnh thành phố Tokyo xa xôi, nơi có những tòa nhà chọc trời, và những đường dây điện che khuất ánh nắng.@
 br
-`Come back from the only life I knew, filled with lights and intersections and the voices of strangers.@
+`Trở về từ cuộc sống duy nhất mà tôi biết, nơi đầy ắp ánh điện cửa gương và dòng người qua lại.@
 br
-`Come back to a place without air conditioners or cell phone reception.@
+`Trở về nơi mà đến cả điều hoà hay sóng điện thoại đều không có@
 br
-`Come back home.\
+`Trở về nhà.\
 
-`"What am I doing here?"@
+`"Mình đang làm gì ở đây vậy?"@
 br
-`But there was no one to answer me.@
+`Không ai trả lời.@
 br
-`"Damn, it's hot ..."@
+`"Mồ, nóng kinh ..."@
 br
-`Still no luck.\
+`Vẫn không chắn được ánh nắng.\
 
-`A summer day.@
+`Một ngày hè.@
 br
-`Just like this one.@
+`Y hệt như hôm nay.@
 br
-`Eight years ago.@
+`Tám năm về trước.@
 br
-`Late at night.  A phone call.@
+`Một cuộc gọi lúc đêm muộn.@
 br
-`That's where it all began.@
+`Tất cả bắt đầu từ đấy.@
 br
-`Without warning.@
+`Không một lời cảnh cáo.@
 br
-`Without a trace ...\
+`Không một dấu vết ...\
 
 
 ;■■■■■■■■■■■■■■■■■■■■■■■■
@@ -818,55 +818,55 @@ bg black,11
 mov $PreviewComment,"`Hồi ức"
 
 mp3loop "bgm\bgm_172.mp3"
-`I can still remember how the phone sounded when it rang that night.@
+`Tôi vẫn nhớ như in tiếng điện thoại kêu đêm hôm ấy.@
 br
-`I was wide awake by the third ring.@
+`Chuông reng đến lần thứ ba là tôi đã tỉnh hẳn rồi.@
 br
-`I remember feeling cold.  Real cold.  Even though it was summer.@
+`Lúc đó tôi cảm thấy rất lạnh. Siêu lạnh. Dù đang là mùa hè.@
 br
-`I could hear my Mom say, "hello?" into the phone.@
+`Tôi có thể nghe thấy mẹ tôi nói "Alô?" vào chiếc điện thoại.@
 br
-`Softly.  She didn't want to wake me.@
+`Tiếng gọi nghe rất mềm mại. Rõ ràng là mẹ không muốn đánh thức tôi.@
 br
-`But it was too late for that.@
+`Nhưng đến lúc đấy thì quá muộn rồi.@
 br
-`I remember looking at the clock.  It was around midnight.@
+`Tôi nhìn đồng hồ.  Lúc đó là khoảng nửa đêm.@
 br
-`I was young.  I was waiting for what would happen next.\
+`Hồi đấy tôi còn bé, nên tôi cứ ngồi đấy đợi xem điều gì sẽ xảy ra tiếp theo.\
 
-`Mom said, "Who is this ... oh, why hello.  Yes, this is she."@
+`Mẹ nói, "Ai đây nhỉ ... A, chào.  Vâng, là tôi đây."@
 br
-`Her voice was so slow.  And so far away.@
+`Giọng bà ấy nhỏ và cách xa tôi quá.@
 br
-`But not far enough for me to miss what she said next.\
+`Nhưng đủ xa để nghe mẹ tôi sẽ nói gì tiếp theo.\
 
-`"He's ... passed away?"@
+`"Anh ấy ... qua đời rồi ư?"@
 br
-`I almost jumped out of bed.\
+`Tôi suýt thì nhảy xuống giường.\
 
-`Because I was young.  Very young.  But not young enough to have no idea what "passed away" meant.@
+`Bởi vì hồi đó tôi còn bé.  Rất bé.  Nhưng đủ lớn để hiểu từ "qua đời" nghĩa là gì.@
 br
-`I broke out in a cold sweat.  Blood drained from my face. I got dizzy all of a sudden.@
+`Tôi đổ mồ hôi lạnh.  Máu bắt đầu tuôn ra từ đầu. Tự dưng tôi thấy chóng mặt.@
 br
-`It was like the earth had split apart under my feet.  I was in free fall.\
+`Như thể mặt đất đã nứt ngay dưới chân tôi vậy.  Tôi đang rơi tự do.\
 
-`Like I said.  I was young.  Very young.  Young enough to understand.@
+`Như tôi đã nói,  tôi còn bé.  Rất bé.  Nhưng đủ lớn để hiểu.@
 br
-`That it really was this simple.@
+`Hiểu rằng cái chết là một cái gì đó thật đơn giản.@
 br
-`When you die, you can't meet your friends and family anymore.@
+`Khi bạn chết, Bạn không thể gặp lại người thân và gia đình nữa.@
 br
-`When you die, you can't be on this earth anymore.@
+`Khi bạn chết, bạn không còn ở trên trái đất này nữa.@
 br
-`When you die, your spirit isn't in your body anymore.@
+`Khi bạn chết, thì linh hồn của bạn lìa khỏi xác.@
 br
-`When you die, you stop moving.@
+`Khi bạn chết, bạn không còn cử động nữa.@
 br
-`I couldn't see or smell or hear or taste anything anymore.  The world whipped around me -- was I standing still now?\
+`Tôi không thể nghe hay ngửi bất cứ thứ gì nữa.  Trời đất chao đảo quanh tôi -- Nãy giờ tôi vẫn đứng yên đây sao?\
 
-`It was forever.@
+`Khoảng thời gian đấy dường như vô tận.@
 br
-`Mom came to me.  Eventually.  The world stopped spinning.@
+`Mẹ chạy đến bên tôi.  Dần dần,  .@
 br
 `But what she said set my world ablaze.\
 
